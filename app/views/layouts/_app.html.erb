@@ -1,0 +1,62 @@
+<%
+  navigation_class =      toggle_visibility force: navigating?,
+                                            klass: %w[navigation has-background-primary-dark is-flex is-flex-direction-column is-justify-content-space-evenly is-align-items-center is-relative]
+
+  applet_class =          toggle_visibility force: !navigating?,
+                                            klass: %w[]
+
+  auxiliary_panel_class = toggle_visibility force: auxiliary?,
+                                            klass: %w[auxiliary-panel is-clipped is-flex is-flex-direction-column-reverse]
+%>
+
+<body data-controller="main-ux" class="is-clipped">
+  <nav
+    data-main-ux-target="navigation"
+    class="<%= navigation_class %>"
+  >
+    <% unless in_root? %>
+      <span
+        class="icon cancel is-large"
+        data-action="click->main-ux#toggleNavigation"
+      >
+        <span class="fas fa-times fa-2x"></span>
+      </span>
+    <% end %>
+
+    <%= render 'layouts/nav_link', link: '#', icon_class: 'fas fa-book-open', text: 'Cookbook', active: true %>
+    <%= render 'layouts/nav_link', link: '#', icon_class: 'fas fa-calendar', text: 'Diet' %>
+    <%= render 'layouts/nav_link', link: '#', icon_class: 'fas fa-shopping-basket', text: 'List' %>
+  </nav>
+
+  <% unless in_root? %>
+    <div
+      data-main-ux-target="applet"
+      class="<%= applet_class %>"
+    >
+      <div class="applet-top-bar is-flex is-justify-content-space-between">
+        <span
+          class="icon is-large"
+          data-action="click->main-ux#toggleNavigation"
+        >
+          <span class="fas fa-bars fa-2x"></span>
+        </span>
+        <%= yield :applet_controls %>
+      </div>
+      <%= yield :applet %>
+    </div>
+  <% end %>
+
+  <div
+    data-main-ux-target="auxiliaryPanel"
+    class="<%= auxiliary_panel_class %>"
+  >
+    <div class="auxiliary-panel-content has-background-white">
+      <%= yield :auxiliary_panel %>
+    </div>
+    <div
+      class="auxiliary-panel-background has-background-grey"
+      data-action="click->main-ux#toggleAuxiliaryPanel"
+    >
+    </div>
+  </div>
+</body>

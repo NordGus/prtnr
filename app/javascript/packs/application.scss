@@ -1,0 +1,67 @@
+@import "app/javascript/stylesheets/addons/fontawesome";
+@import "app/javascript/stylesheets/addons/bulma";
+
+body {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-height: 100vh;
+  min-height: 100%;
+
+  .navigation {
+    max-height: 100vh;
+    min-height: 100%;
+    z-index: 20;
+
+    .icon.cancel {
+      position: absolute;
+      z-index: 25;
+      top: 1rem;
+      left: 1rem;
+      color: $primary;
+    }
+
+    .nav-link {
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: $radius;
+
+      width: 7rem;
+      height: 8rem;
+
+      color: $primary;
+
+      &.is-active {
+        background-color: $primary;
+        color: $primary-dark;
+      }
+    }
+  }
+
+  .auxiliary-panel {
+    z-index: 40;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-height: 100vh;
+    min-height: 100%;
+
+    .auxiliary-panel-background {
+      opacity: 0.5;
+      height: 100%;
+    }
+
+    .auxiliary-panel-content {
+      min-height: 30vh;
+      max-height: 80vh;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+  }
+}

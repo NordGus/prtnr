@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Ktchn</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_pack_tag 'application', media: 'all' %>
+    <%= javascript_pack_tag 'application' %>
+  </head>
+
+  <%= render 'layouts/app' do %>
+    <%= content_for :applet do %>
+      <%= yield :applet %>
+    <% end %>
+    <%= content_for :auxiliary_panel do %>
+      <%= yield :auxiliary_panel %>
+    <% end %>
+  <% end %>
+</html>
