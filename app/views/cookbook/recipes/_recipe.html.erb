@@ -1,56 +1,48 @@
-<% detailed ||= false %>
+<div class="recipe-header has-background-primary-light">
+  <div class="recipe-header-content p-2 pt-6 is-flex is-flex-direction-column is-justify-content-flex-end <%= recipe.cover_image.attached? ? 'has-shadow' : '' %>">
+    <h1 class="title <%= recipe.cover_image.attached? ? 'has-text-white' : '' %>"><%= @recipe.name %></h1>
+    <p class="subtitle <%= recipe.cover_image.attached? ? 'has-text-white' : '' %> is-5">For <%= pluralize @recipe.portions, 'person' %></p>
+  </div>
+  <% if recipe.cover_image.attached? %>
+    <%= image_tag recipe.cover_image %>
+  <% end %>
+</div>
 
-<% if detailed %>
-  <% cover_image_present = recipe.cover_image.present? %>
+<div class="message mx-1 my-2">
+  <div class="message-body">
+    <% if @recipe.description.present? %>
+      <%= @recipe.description %>
+    <% else %>
+      <i>Insert catchy short description...</i>
+    <% end %>
+  </div>
+</div>
 
-  <div class="recipe-header has-background-primary-light">
-    <div class="recipe-header-content p-2 pt-6 is-flex is-flex-direction-column is-justify-content-flex-end <%= cover_image_present ? 'has-shadow' : '' %>">
-      <h1 class="title <%= cover_image_present ? 'has-text-white' : '' %>"><%= @recipe.name %></h1>
-      <p class="subtitle <%= cover_image_present ? 'has-text-white' : '' %> is-5">For <%= pluralize @recipe.portions, 'person' %></p>
-    </div>
-    <% if cover_image_present %>
-      <%= image_tag recipe.cover_image %>
+<div data-controller="tabs">
+  <div class="tabs mx-1 mb-2 is-boxed is-fullwidth">
+    <ul>
+      <% %w[Preparation Ingredients].each do |tab| %>
+        <li
+          class="<%= tab.downcase == 'preparation' ? 'is-active' : '' %>"
+          data-action="click->tabs#showTab"
+          data-target-tab="<%= tab.downcase %>"
+          data-tabs-target="link"
+        >
+          <a><%= tab %></a>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="tab px-2" data-tabs-target="tab" data-tab-name="preparation">
+    <% if recipe.preparation.present? %>
+      <%= recipe.preparation %>
+    <% else %>
+      <i>Insert a comprehensive and detailed list preparation instructions...</i>
     <% end %>
   </div>
 
-  <div class="message mx-1 my-2">
-    <div class="message-body">
-      <% if @recipe.description.present? %>
-        <%= @recipe.description %>
-      <% else %>
-        <i>Insert catchy short description...</i>
-      <% end %>
-    </div>
+  <div class="tab px-2 is-hidden" data-tabs-target="tab" data-tab-name="ingredients">
+
   </div>
-
-  <div data-controller="tabs">
-    <div class="tabs mx-1 mb-2 is-boxed is-fullwidth">
-      <ul>
-        <% %w[Preparation Ingredients].each do |tab| %>
-          <li
-            class="<%= tab.downcase == 'preparation' ? 'is-active' : '' %>"
-            data-action="click->tabs#showTab"
-            data-target-tab="<%= tab.downcase %>"
-            data-tabs-target="link"
-          >
-            <a><%= tab %></a>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-
-    <div class="tab px-2" data-tabs-target="tab" data-tab-name="preparation">
-      <% if @recipe.preparation.present? %>
-        <%= @recipe.preparation %>
-      <% else %>
-        <i>Insert a comprehensive and detailed list preparation instructions...</i>
-      <% end %>
-    </div>
-
-    <div class="tab px-2 is-hidden" data-tabs-target="tab" data-tab-name="ingredients">
-
-    </div>
-  </div>
-<% else %>
-  <%= render Previews::RecipeComponent.new recipe: recipe %>
-<% end %>
+</div>

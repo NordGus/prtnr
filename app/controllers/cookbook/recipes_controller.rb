@@ -39,7 +39,7 @@ module Cookbook
     def destroy
       @recipe.destroy
 
-      redirect_to cookbook_recipes_url
+      head :success
     end
 
     private

@@ -1,0 +1,18 @@
+<div class="block pt-6">
+  <i class="fas fa-exclamation-circle fa-7x has-text-danger is-block has-text-centered"></i>
+</div>
+
+<p class="subtitle mb-6 mx-auto has-text-centered"><%= content %></p>
+
+<div class="buttons is-centered pb-3" data-controller="destroyable">
+  <%= link_to 'Delete',
+              @url,
+              class: 'button is-danger',
+              data: {
+                destroyable_target: 'button',
+                action: 'click->destroyable#destroy',
+                success: @success_url
+              }
+  %>
+  <%= render Layout::CloseModalComponent.new %>
+</div>

@@ -1,12 +1,3 @@
-<%= turbo_stream.replace :modal do %>
-  <%= render Layout::ModalComponent.new do %>
-    <%= turbo_stream_from :auxiliary_panel %>
-    <%= turbo_frame_tag :auxiliary_panel, data: { main_ux_target: 'modalFrame' } do %>
-      <%= yield :auxiliary_panel %>
-    <% end %>
-  <% end %>
-<% end %>
-
 <%= turbo_stream.remove :no_recipes_placeholder %>
 
 <%= turbo_stream.append :recipes do %>
@@ -18,5 +9,11 @@
 <% end %>
 
 <%= turbo_stream.update :recipe do %>
-  <%= render @recipe, detailed: true %>
+  <%= render @recipe %>
+<% end %>
+
+<%= turbo_stream.update :auxiliary_panel do %>
+  <%= render Notices::SuccessComponent.new do %>
+    <strong><%= @recipe.name %></strong> added!
+  <% end %>
 <% end %>

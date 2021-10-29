@@ -12,10 +12,8 @@
     <%= render Form::Input::RichTextareaComponent.new(form: form, attr: :preparation, model: recipe) %>
   </div>
 
-  <div class="field">
-    <div class="control">
-      <%= form.submit class: 'button is-primary' %>
-      <%= link_to 'Back', '#', class: 'button', data: { action: 'click->main-ux#closeModal' } %>
-    </div>
+  <div class="buttons is-centered pb-3">
+    <%= form.submit class: 'button is-primary' %>
+    <%= render Layout::CloseModalComponent.new %>
   </div>
 <% end %>

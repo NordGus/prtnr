@@ -13,6 +13,7 @@ import BaseController from "../controllers/cookbook/base_controller";
 import NumericController from "../controllers/forms/inputs/numeric_controller";
 import LimitableController from "../controllers/forms/inputs/limitable_controller";
 import ImageableController from "../controllers/forms/inputs/imageable_controller";
+import DestroyableController from "../controllers/destroyable_controller";
 
 import 'trix'
 import '@rails/actiontext'
@@ -27,6 +28,7 @@ Stimulus.register('main-ux', MainUXController)
 Stimulus.register('cookbook', BaseController)
 
 Stimulus.register('tabs', TabsController)
+Stimulus.register('destroyable', DestroyableController)
 
 Stimulus.register('input-numeric', NumericController)
 Stimulus.register('input-limitable', LimitableController)

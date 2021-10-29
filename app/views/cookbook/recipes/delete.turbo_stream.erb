@@ -1,15 +1,5 @@
 <%= turbo_stream.update :auxiliary_panel do %>
-  <p class="subtitle mb-6 mx-auto has-text-centered">Do you want to delete <strong><%= @recipe.name %></strong> from cookbook?</p>
-
-  <div class="buttons is-centered">
-    <%= link_to 'Delete',
-                @recipe,
-                class: 'button is-danger',
-                data: {
-                  action: 'click->main-ux#destroyRecord',
-                  root: cookbook_url
-                }
-    %>
-    <%= link_to 'Cancel', '#', class: 'button', data: { action: 'click->main-ux#closeModal' } %>
-  </div>
+  <%= render Notices::DestroyComponent.new url: cookbook_recipe_url(@recipe), success_url: cookbook_url do %>
+    Do you want to delete <strong><%= @recipe.name %></strong> from cookbook?
+  <% end %>
 <% end %>

@@ -2,7 +2,9 @@
 
 module Layout
   class ModalComponent < ViewComponent::Base
-    def initialize
+    def initialize(expanded: false)
+      @expanded = expanded
+
       super
     end
   end
