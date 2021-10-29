@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
   root to: 'application#applet'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  get '/cookbook', to: 'cookbook#applet'
+  
+  namespace :cookbook do
+    resources :recipes do
+      member do
+        get :delete
+      end
+    end
+  end
 end

@@ -2,7 +2,7 @@ FROM ruby:3.0.2
 
 RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash -
 RUN apt-get update && \
-    apt-get install postgresql-client nano nodejs -y && \
+    apt-get install postgresql-client nano nodejs imagemagick -y && \
     npm install --global yarn
 
 WORKDIR /var/app

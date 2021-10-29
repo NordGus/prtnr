@@ -1,8 +1,0 @@
-<% active ||= false %>
-
-<%= link_to link, class: "nav-link p-1#{ active ? ' is-active' : '' }" do %>
-  <span class="m-auto icon">
-    <i class="<%= icon_class + ' fa-4x' %>"></i>
-  </span>
-  <span><%= text %></span>
-<% end %>

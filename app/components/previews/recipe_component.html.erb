@@ -1,0 +1,12 @@
+<% case @style %>
+<% when :link %>
+  <%= link_to @recipe, class: 'preview mx-1 mb-1 has-background-primary', id: dom_id(@recipe), target: :_top do %>
+    <div class="data p-2 <%= @recipe.cover_image.present? ? 'has-shadow' : '' %>">
+      <h3 class="title has-text-white is-4"><%= @recipe.name %></h3>
+      <p class="subtitle has-text-white is-6"><%= @recipe.description.truncate(52) %></p>
+    </div>
+    <% if @recipe.cover_image.present? %>
+      <%= image_tag @recipe.cover_image %>
+    <% end %>
+  <% end %>
+<% end %>

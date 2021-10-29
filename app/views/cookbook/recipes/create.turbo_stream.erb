@@ -1,0 +1,22 @@
+<%= turbo_stream.replace :modal do %>
+  <%= render Layout::ModalComponent.new do %>
+    <%= turbo_stream_from :auxiliary_panel %>
+    <%= turbo_frame_tag :auxiliary_panel, data: { main_ux_target: 'modalFrame' } do %>
+      <%= yield :auxiliary_panel %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<%= turbo_stream.remove :no_recipes_placeholder %>
+
+<%= turbo_stream.append :recipes do %>
+  <%= render Previews::RecipeComponent.new recipe: @recipe %>
+<% end %>
+
+<%= turbo_stream.update :applet_controls do %>
+  <%= render 'controls', recipe: @recipe %>
+<% end %>
+
+<%= turbo_stream.update :recipe do %>
+  <%= render @recipe, detailed: true %>
+<% end %>

@@ -10,12 +10,83 @@
     <%= javascript_pack_tag 'application' %>
   </head>
 
-  <%= render 'layouts/app' do %>
-    <%= content_for :applet do %>
-      <%= yield :applet %>
+  <%
+    navigation_class =      toggle_visibility force: navigating?,
+                                              klass: %w[navigation has-background-primary is-flex is-flex-direction-column is-justify-content-space-evenly is-align-items-center is-relative]
+
+    applet_class =          toggle_visibility force: !navigating?,
+                                              klass: %w[applet]
+  %>
+
+  <body data-controller="main-ux" class="is-clipped">
+    <nav
+      data-main-ux-target="navigation"
+      class="<%= navigation_class %>"
+    >
+      <% unless in_root? %>
+        <div class="cancel p-1">
+          <div class="button is-primary" data-action="click->main-ux#toggleNavigation">
+            <span class="icon">
+              <span class="fas fa-times"></span>
+            </span>
+          </div>
+        </div>
+      <% end %>
+      <%=
+        render Nav::LinkComponent.new url: cookbook_path,
+                                      text: 'Cookbook',
+                                      icon_class: %w[fas fa-book-open],
+                                      active: active_nav_link(:cookbook)
+      %>
+
+      <%=
+        render Nav::LinkComponent.new url: '#',
+                                      text: 'Diet',
+                                      icon_class: %w[fas fa-calendar],
+                                      active: active_nav_link(:diet)
+      %>
+
+      <%=
+        render Nav::LinkComponent.new url: '#',
+                                      text: 'List',
+                                      icon_class: %w[fas fa-shopping-basket],
+                                      active: active_nav_link(:list)
+      %>
+    </nav>
+
+    <% unless in_root? %>
+      <div
+        data-main-ux-target="applet"
+        class="<%= applet_class %>"
+        data-controller="<%= applet_data_controller %>"
+      >
+        <div
+          class="topbar is-flex is-justify-content-space-between p-1"
+        >
+          <div class="button is-primary">
+            <span
+              class="icon is-large"
+              data-action="click->main-ux#toggleNavigation"
+            >
+              <span class="fas fa-bars"></span>
+            </span>
+          </div>
+          <%= turbo_stream_from :applet_controls %>
+          <%= turbo_frame_tag :applet_controls do %>
+            <%= yield :applet_controls %>
+          <% end %>
+        </div>
+        <div class="main-display m-0 p-0">
+          <%= yield :applet %>
+        </div>
+      </div>
     <% end %>
-    <%= content_for :auxiliary_panel do %>
-      <%= yield :auxiliary_panel %>
+
+    <%= render Layout::ModalComponent.new do %>
+      <%= turbo_stream_from :auxiliary_panel %>
+      <%= turbo_frame_tag :auxiliary_panel, data: { main_ux_target: 'modalFrame' } do %>
+        <%= yield :auxiliary_panel %>
+      <% end %>
     <% end %>
-  <% end %>
+  </body>
 </html>

@@ -1,0 +1,7 @@
+<%= turbo_stream.update :auxiliary_panel do %>
+  <div class="block">
+    <h1 class="title">New Recipe</h1>
+  </div>
+
+  <%= render 'form', recipe: @recipe %>
+<% end %>

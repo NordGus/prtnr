@@ -1,0 +1,9 @@
+<%= content_for :applet_controls do %>
+  <%= render 'controls', recipe: @recipe %>
+<% end %>
+
+<%= content_for :applet do %>
+  <%= render 'cookbook/applet' do %>
+    <%= render @recipe, detailed: true %>
+  <% end %>
+<% end %>

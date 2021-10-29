@@ -1,0 +1,14 @@
+<div
+  data-main-ux-target="modal"
+  class="auxiliary-panel is-clipped is-flex is-flex-direction-column-reverse is-hidden"
+  id="modal"
+>
+  <div class="auxiliary-panel-content has-background-white p-3">
+    <%= content %>
+  </div>
+
+  <div
+    class="auxiliary-panel-background has-background-grey"
+    data-action="click->main-ux#closeModal"
+  ></div>
+</div>

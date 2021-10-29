@@ -1,0 +1,38 @@
+<div class="field" data-controller="input-imageable">
+  <div class="control">
+    <figure class="image has-rounded-corners mb-2 is-hidden" data-input-imageable-target="preview">
+      <% if @image.present? %>
+        <%= image_tag @image, data: { input_imageable_target: 'previewOutput' }, height: '100px', width: 'auto' %>
+      <% else %>
+        <%= image_tag '', data: { input_imageable_target: 'previewOutput' }, height: '100px', width: 'auto' %>
+      <% end %>
+    </figure>
+  </div>
+  <div class="control">
+      <div class="file has-name is-fullwidth">
+        <label class="file-label">
+          <%= @form.file_field @attr,
+                               class: @input_classes,
+                               data: {
+                                 input_imageable_target: 'input',
+                                 action: 'change->input-imageable#readFiles'
+                               }
+          %>
+          <span class="file-cta">
+            <span class="file-icon">
+              <i class="fas fa-camera"></i>
+            </span>
+            <span class="file-label">
+              Attach Photo...
+            </span>
+          </span>
+          <span class="file-name" data-input-imageable-target="name">
+            <%= @image&.filename&.to_s || '' %>
+          </span>
+        </label>
+      </div>
+    </div>
+  <% @errors&.each do |error| %>
+    <p class="help is-danger"><%= error %></p>
+  <% end %>
+</div>

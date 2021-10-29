@@ -1,0 +1,29 @@
+<% expanded ||= false %>
+
+<div class="side-panel <%= expanded ? 'is-expanded' : '' %>" data-cookbook-target="panel">
+  <div class="side-panel-body pt-1 pr-1 <%= expanded ? '' : 'is-hidden' %>" data-cookbook-target="panelContent">
+    <%= turbo_stream_from :recipes %>
+    <%= turbo_frame_tag :recipes, src: cookbook_recipes_url(format: :turbo_stream), class: 'is-block' do %>
+      <progress class="progress is-primary" max="100">60%</progress>
+    <% end %>
+  </div>
+
+  <div class="side-panel-controls is-block px-1 pt-1">
+    <button
+      class="button is-primary <%= expanded ? 'is-focused' : '' %>"
+      data-action="click->cookbook#togglePanel"
+      data-cookbook-target="panelToggle"
+    >
+      <span class="icon">
+        <i class="fas fa-bookmark"></i>
+      </span>
+    </button>
+  </div>
+</div>
+
+<div class="recipe-container">
+  <%= turbo_stream_from :recipe %>
+  <%= turbo_frame_tag :recipe do %>
+    <%= yield %>
+  <% end %>
+</div>

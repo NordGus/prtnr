@@ -1,0 +1,6 @@
+<%= link_to @url, class: @html_class do %>
+  <span class="m-auto icon">
+    <i class="<%= @icon_class.join(' ') %>"></i>
+  </span>
+  <span><%= @text %></span>
+<% end %>
