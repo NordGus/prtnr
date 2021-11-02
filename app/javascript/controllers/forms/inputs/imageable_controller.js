@@ -1,18 +1,12 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class ImageableController extends Controller {
-    static targets = ['input', 'name', 'preview', 'previewOutput']
-
-    connect() {
-        if (this.previewOutputTarget.src) this.previewTarget.classList.toggle('is-hidden', false)
-    }
-
+    static targets = ['input', 'name', 'preview']
 
     readFiles(_event) {
         const input = this.inputTarget
         const output = this.nameTarget
         const preview = this.previewTarget
-        const previewOutput = this.previewOutputTarget
 
         if (input.files.length > 0) {
             const fileNames = new Array(input.files.length)
@@ -23,7 +17,7 @@ export default class ImageableController extends Controller {
 
             const reader = new FileReader()
 
-            reader.onload = () => previewOutput.src = reader.result
+            reader.onload = () => preview.src = reader.result
 
             output.innerText = fileNames.join(', ')
             reader.readAsDataURL(input.files[0])

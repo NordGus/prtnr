@@ -1,0 +1,4 @@
+<%=
+  render Layout::ActionButtonComponent.new url: edit_cookbook_recipe_path(recipe, format: :turbo_stream),
+                                           id: :edit_button, color: :link, icon_class: %w[fas fa-pen]
+%>

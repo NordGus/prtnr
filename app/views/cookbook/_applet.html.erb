@@ -1,14 +1,15 @@
 <% expanded ||= false %>
 
+<%= turbo_stream_from :cookbook %>
+
 <div class="side-panel <%= expanded ? 'is-expanded' : '' %>" data-cookbook-target="panel">
-  <div class="side-panel-body pt-1 pr-1 <%= expanded ? '' : 'is-hidden' %>" data-cookbook-target="panelContent">
-    <%= turbo_stream_from :recipes %>
+  <div class="side-panel-body pt-3 pr-1 pl-3 <%= expanded ? '' : 'is-hidden' %>" data-cookbook-target="panelContent">
     <%= turbo_frame_tag :recipes, src: cookbook_recipes_url(format: :turbo_stream), class: 'is-block' do %>
-      <progress class="progress is-primary" max="100">60%</progress>
+      <progress class="progress is-primary" max="100">0%</progress>
     <% end %>
   </div>
 
-  <div class="side-panel-controls is-block px-1 pt-1">
+  <div class="side-panel-controls p-3">
     <button
       class="button is-primary <%= expanded ? 'is-focused' : '' %>"
       data-action="click->cookbook#togglePanel"
@@ -22,7 +23,6 @@
 </div>
 
 <div class="recipe-container">
-  <%= turbo_stream_from :recipe %>
   <%= turbo_frame_tag :recipe do %>
     <%= yield %>
   <% end %>

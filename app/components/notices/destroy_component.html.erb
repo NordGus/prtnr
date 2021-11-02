@@ -8,10 +8,9 @@
   <%= link_to 'Delete',
               @url,
               class: 'button is-danger',
-              data: {
-                destroyable_target: 'button',
-                action: 'click->destroyable#destroy',
-                success: @success_url
+              data:  {
+                       destroyable_target: 'button',
+                       action: 'click->destroyable#destroy click->layout#requestFromButton'
               }
   %>
   <%= render Layout::CloseModalComponent.new %>

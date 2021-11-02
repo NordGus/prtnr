@@ -1,5 +1,10 @@
+<%
+  recipe_header_content_class = %w[recipe-header-content p-3 pt-6 mt-3]
+  recipe_header_content_class << 'has-cover-image' if recipe.cover_image.attached?
+%>
+
 <div class="recipe-header has-background-primary-light">
-  <div class="recipe-header-content p-2 pt-6 is-flex is-flex-direction-column is-justify-content-flex-end <%= recipe.cover_image.attached? ? 'has-shadow' : '' %>">
+  <div class="<%= recipe_header_content_class.join(' ') %>">
     <h1 class="title <%= recipe.cover_image.attached? ? 'has-text-white' : '' %>"><%= @recipe.name %></h1>
     <p class="subtitle <%= recipe.cover_image.attached? ? 'has-text-white' : '' %> is-5">For <%= pluralize @recipe.portions, 'person' %></p>
   </div>

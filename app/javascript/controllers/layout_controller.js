@@ -1,11 +1,8 @@
 import {Controller} from "@hotwired/stimulus";
 import { get } from "@rails/request.js";
 
-export default class MainUXController extends Controller {
-    static targets = ['navigation', 'applet', 'modal', 'modalFrame']
-
-    connect() {
-    }
+export default class LayoutController extends Controller {
+    static targets = ['navigation', 'applet', 'modal', 'modalContent']
 
     toggleNavigation(_event) {
         const navigation = this.navigationTarget
@@ -15,27 +12,23 @@ export default class MainUXController extends Controller {
         applet.classList.toggle('is-hidden')
     }
 
-    async deployModal(event) {
-        event.preventDefault()
-
+    openModal(_event) {
         const modal = this.modalTarget
-        const href = event.currentTarget.href
 
         modal.classList.toggle('is-hidden', false)
-        const response = await get(href, { responseKind: 'turbo-stream' })
-
-        if (!response.ok) {
-            modal.classList.toggle('is-hidden', true)
-        }
     }
 
     closeModal(event) {
         event.preventDefault()
 
         const modal = this.modalTarget
-        const frame = this.modalFrameTarget
+        const frame = this.modalContentTarget
 
         modal.classList.toggle('is-hidden', true)
         frame.innerHTML = ''
+    }
+
+    requestFromButton(event) {
+        event.currentTarget.classList.toggle('is-loading', true)
     }
 }

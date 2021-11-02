@@ -1,0 +1,4 @@
+<%=
+  render Layout::ActionButtonComponent.new url: delete_cookbook_recipe_path(recipe, format: :turbo_stream),
+                                           id: :destroy_button, color: :danger, icon_class: %w[fas fa-trash]
+%>

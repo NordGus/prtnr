@@ -1,0 +1,11 @@
+<%= button_to @url,
+              class:      @button_class,
+              form:       { id: @id },
+              form_class: @form_class,
+              target:     :_top,
+              method:     @method,
+              data:       { action: 'click->layout#openModal click->layout#requestFromButton' } do %>
+  <span class="icon">
+    <%= tag.i '', class: @icon_class %>
+  </span>
+<% end %>

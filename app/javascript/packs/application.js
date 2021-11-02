@@ -7,7 +7,7 @@ import Rails from "@rails/ujs"
 import * as ActiveStorage from "@rails/activestorage"
 
 import { Application } from "@hotwired/stimulus";
-import MainUXController from "../controllers/main_ux_controller";
+import LayoutController from "../controllers/layout_controller";
 import TabsController from "../controllers/tabs_controller";
 import BaseController from "../controllers/cookbook/base_controller";
 import NumericController from "../controllers/forms/inputs/numeric_controller";
@@ -24,7 +24,7 @@ Rails.start()
 ActiveStorage.start()
 
 window.Stimulus = Application.start()
-Stimulus.register('main-ux', MainUXController)
+Stimulus.register('layout', LayoutController)
 Stimulus.register('cookbook', BaseController)
 
 Stimulus.register('tabs', TabsController)
@@ -33,8 +33,3 @@ Stimulus.register('destroyable', DestroyableController)
 Stimulus.register('input-numeric', NumericController)
 Stimulus.register('input-limitable', LimitableController)
 Stimulus.register('input-imageable', ImageableController)
-
-Stimulus.handleError = (error, message, detail) => {
-    console.warn(message, detail)
-    ErrorTrackingSystem.captureException(error)
-}

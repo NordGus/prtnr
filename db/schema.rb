@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_29_141447) do
+ActiveRecord::Schema.define(version: 2021_10_30_145638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,27 @@ ActiveRecord::Schema.define(version: 2021_10_29_141447) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "cookbook_ingredients", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_cookbook_ingredients_on_name", unique: true
+  end
+
+  create_table "cookbook_recipe_ingredients", force: :cascade do |t|
+    t.bigint "recipe_id", null: false
+    t.bigint "ingredient_id", null: false
+    t.string "unit_type", null: false
+    t.bigint "unit_id", null: false
+    t.decimal "amount", precision: 10, scale: 3, default: "0.0", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ingredient_id"], name: "recipe_ingredient_ingredient_reference"
+    t.index ["recipe_id"], name: "recipe_ingredient_recipe_reference"
+    t.index ["unit_id", "unit_type"], name: "index_cookbook_recipe_ingredients_on_unit_id_and_unit_type"
+    t.index ["unit_type", "unit_id"], name: "recipe_ingredient_unit_reference"
+  end
+
   create_table "cookbook_recipes", force: :cascade do |t|
     t.string "name", null: false
     t.string "description"
@@ -80,4 +101,6 @@ ActiveRecord::Schema.define(version: 2021_10_29_141447) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "cookbook_recipe_ingredients", "cookbook_ingredients", column: "ingredient_id"
+  add_foreign_key "cookbook_recipe_ingredients", "cookbook_recipes", column: "recipe_id"
 end

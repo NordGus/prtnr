@@ -1,5 +1,7 @@
 <%= content_for :applet_controls do %>
-  <%= render 'controls', recipe: @recipe %>
+  <%= render 'cookbook/recipes/controls/new' %>
+  <%= render 'cookbook/recipes/controls/edit', recipe: @recipe %>
+  <%= render 'cookbook/recipes/controls/destroy', recipe: @recipe %>
 <% end %>
 
 <%= content_for :applet do %>

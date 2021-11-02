@@ -11,7 +11,3 @@
 <%= turbo_stream.update :recipe do %>
   <%= render @recipe %>
 <% end %>
-
-<%= turbo_stream.update :applet_controls do %>
-  <%= render 'controls', recipe: @recipe %>
-<% end %>

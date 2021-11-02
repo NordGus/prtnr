@@ -1,12 +1,10 @@
 <div class="field" data-controller="input-imageable">
   <div class="control">
-    <figure class="image has-rounded-corners mb-2 is-hidden" data-input-imageable-target="preview">
-      <% if @image.present? %>
-        <%= image_tag @image, data: { input_imageable_target: 'previewOutput' }, height: '100px', width: 'auto' %>
-      <% else %>
-        <%= image_tag '', data: { input_imageable_target: 'previewOutput' }, height: '100px', width: 'auto' %>
-      <% end %>
-    </figure>
+    <%=
+      image_tag @image.present? ? @image : '',
+                class: "rounded-image mb-2 #{ @image.present? ? '' : 'is-hidden' }",
+                data: { input_imageable_target: 'preview' }
+    %>
   </div>
   <div class="control">
       <div class="file has-name is-fullwidth">

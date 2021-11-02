@@ -7,14 +7,8 @@ export default class DestroyableController extends Controller {
     async destroy(event) {
         event.preventDefault()
 
-        const button = this.buttonTarget
-        const href = button.href
-        const success = button.dataset['success']
+        const response = await destroy(this.buttonTarget.href)
 
-        button.classList.toggle('is-loading', true)
-
-        const _ = await destroy(href)
-
-        window.location.href = success
+        window.location.href = response.response.url
     }
 }

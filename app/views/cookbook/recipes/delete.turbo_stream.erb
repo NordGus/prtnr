@@ -1,5 +1,9 @@
+<%= turbo_stream.replace :destroy_button do %>
+  <%= render 'cookbook/recipes/controls/destroy', recipe: @recipe %>
+<% end %>
+
 <%= turbo_stream.update :auxiliary_panel do %>
-  <%= render Notices::DestroyComponent.new url: cookbook_recipe_url(@recipe), success_url: cookbook_url do %>
+  <%= render Notices::DestroyComponent.new url: cookbook_recipe_url(@recipe) do %>
     Do you want to delete <strong><%= @recipe.name %></strong> from cookbook?
   <% end %>
 <% end %>

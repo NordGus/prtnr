@@ -12,10 +12,7 @@ module Cookbook
     end
 
     def show
-      respond_to do |format|
-        format.turbo_stream
-        format.html { render layout: 'application' }
-      end
+      render layout: 'application'
     end
 
     def new
@@ -39,7 +36,7 @@ module Cookbook
     def destroy
       @recipe.destroy
 
-      head :success
+      redirect_to cookbook_url, method: :get
     end
 
     private
