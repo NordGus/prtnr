@@ -1,0 +1,26 @@
+<% case @style %>
+<% when :link %>
+  <div class="is-flex" id="<%= dom_id @recipe_ingredient %>">
+    <%= render 'cookbook/recipe_ingredients/controls/destroy', recipe: @recipe, recipe_ingredient: @recipe_ingredient %>
+
+    <%= link_to edit_cookbook_recipe_recipe_ingredient_url(@recipe, @recipe_ingredient),
+                class: 'preview is-small ml-1 mb-1 has-background-primary',
+                data: { action: 'click->layout#deployModal' } do %>
+
+      <div class="data p-2 <%= @recipe_ingredient.ingredient.cover_image.present? ? 'has-shadow' : '' %>">
+        <h3 class="title has-text-white is-4 m-0 p-0"><%= @recipe_ingredient.ingredient.name.titleize %></h3>
+        <div class="is-flex is-justify-content-flex-end">
+          <p class="has-text-white is-size-5">
+            <%= number_with_precision(@recipe_ingredient.amount, precision: 3, separator: ',', delimiter: '.', strip_insignificant_zeros: true) %>
+            <strong><%= @recipe_ingredient.unit.name %></strong>
+          </p>
+        </div>
+      </div>
+
+      <% if @recipe_ingredient.ingredient.cover_image.present? %>
+        <%= image_tag @recipe_ingredient.ingredient.cover_image %>
+      <% end %>
+
+    <% end %>
+  </div>
+<% end %>

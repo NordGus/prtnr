@@ -1,0 +1,12 @@
+<%=
+  tag.span ingredient.name.titleize,
+           class: 'button m-2',
+           data: {
+             action: 'click->cookbook-ingredient#select',
+             cookbook_ingredient_target: 'result',
+             id: ingredient.id,
+             preview: ingredient.cover_image.attached? ? url_for(ingredient.cover_image) : '',
+             filename: ingredient.cover_image&.filename,
+             name: ingredient.name.titleize
+           }
+%>

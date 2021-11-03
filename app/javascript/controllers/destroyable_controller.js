@@ -9,6 +9,6 @@ export default class DestroyableController extends Controller {
 
         const response = await destroy(this.buttonTarget.href)
 
-        window.location.href = response.response.url
+        if (response.redirected) window.location.href = response.response.url
     }
 }

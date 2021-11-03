@@ -1,0 +1,56 @@
+<%
+  edit ||= false
+  form_url = edit ? cookbook_recipe_recipe_ingredient_url(recipe, recipe_ingredient) : cookbook_recipe_recipe_ingredients_path(recipe: recipe)
+  method = edit ? :put : :post
+%>
+
+<%= form_for recipe_ingredient, as: :recipe_ingredient, url: form_url, method: method do |form| %>
+  <div class="block"
+       data-controller="searchable cookbook-ingredient"
+       data-searchable-endpoint-value="<%= search_cookbook_ingredients_url(format: :turbo_stream) %>"
+  >
+    <div class="buttons m-0 mb-2 p-0">
+      <span class="button is-warning m-0" data-action="click->cookbook-ingredient#clear">Clear</span>
+    </div>
+
+    <%= form.fields_for :ingredient, recipe_ingredient.ingredient, include_id: false do |ingredient_form| %>
+      <%= ingredient_form.hidden_field :id, data: { cookbook_ingredient_target: 'id' } %>
+
+      <%= render Form::Input::ImageComponent.new form: ingredient_form,
+                                                 attr: :cover_image,
+                                                 model: recipe_ingredient.ingredient,
+                                                 options: {
+                                                   preview_data: {
+                                                     cookbook_ingredient_target: 'preview'
+                                                   },
+                                                   field_data: {
+                                                     cookbook_ingredient_target: 'file'
+                                                   }
+                                                 }
+      %>
+
+      <div class="buttons is-centered m-0 p-0" id="ingredient_search_results">
+      </div>
+
+      <%= render Form::Input::TextComponent.new form: ingredient_form,
+                                                attr: :name,
+                                                model: recipe_ingredient.ingredient,
+                                                options: {
+                                                  data: {
+                                                    cookbook_ingredient_target: 'name',
+                                                    action: 'change->searchable#search keyup->searchable#search'
+                                                  }
+                                                }
+      %>
+    <% end %>
+
+    <%= render Form::Input::NumericComponent.new(form: form, attr: :amount, model: recipe_ingredient, step: 0.001) %>
+
+    <%= render Form::Input::SelectComponent.new(form: form, attr: :unit, model: recipe_ingredient, collection_class: Inventory::Unit::Base) %>
+  </div>
+
+  <div class="buttons is-centered pb-3">
+    <%= form.submit class: 'button is-primary', data: { action: 'click->layout#requestFromButton' } %>
+    <%= render Layout::CloseModalComponent.new %>
+  </div>
+<% end %>

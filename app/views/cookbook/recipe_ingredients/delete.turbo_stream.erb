@@ -1,0 +1,9 @@
+<%= turbo_stream.replace dom_id(@recipe_ingredient) do %>
+  <%= render Previews::RecipeIngredientComponent.new recipe_ingredient: @recipe_ingredient , recipe: @recipe %>
+<% end %>
+
+<%= turbo_stream.update :auxiliary_panel do %>
+  <%= render Notices::DestroyComponent.new url: cookbook_recipe_recipe_ingredient_url(@recipe, @recipe_ingredient, format: :turbo_stream) do %>
+    Do you want to remove <strong><%= @recipe_ingredient.ingredient.name.titleize %></strong> as a <strong><%= @recipe.name %></strong> ingredient?
+  <% end %>
+<% end %>

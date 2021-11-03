@@ -14,6 +14,8 @@ import NumericController from "../controllers/forms/inputs/numeric_controller";
 import LimitableController from "../controllers/forms/inputs/limitable_controller";
 import ImageableController from "../controllers/forms/inputs/imageable_controller";
 import DestroyableController from "../controllers/destroyable_controller";
+import SearchableController from "../controllers/searchable_controller";
+import IngredientController from "../controllers/cookbook/ingredient_controller";
 
 import 'trix'
 import '@rails/actiontext'
@@ -26,9 +28,11 @@ ActiveStorage.start()
 window.Stimulus = Application.start()
 Stimulus.register('layout', LayoutController)
 Stimulus.register('cookbook', BaseController)
+Stimulus.register('cookbook-ingredient', IngredientController)
 
 Stimulus.register('tabs', TabsController)
 Stimulus.register('destroyable', DestroyableController)
+Stimulus.register('searchable', SearchableController)
 
 Stimulus.register('input-numeric', NumericController)
 Stimulus.register('input-limitable', LimitableController)

@@ -1,0 +1,10 @@
+<%= turbo_stream.update :ingredients do %>
+  <div class="block">
+    <%= render 'cookbook/recipe_ingredients/controls/new', recipe: @recipe %>
+  </div>
+  <% if @recipe_ingredients.any? %>
+    <%= render Previews::RecipeIngredientComponent.with_collection @recipe_ingredients, recipe: @recipe %>
+  <% else %>
+    <i id="no_recipe_ingredients_placeholder" class="is-block py-3">Sorry, no ingredients where found</i>
+  <% end %>
+<% end %>

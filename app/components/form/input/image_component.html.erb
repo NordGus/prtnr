@@ -1,9 +1,9 @@
 <div class="field" data-controller="input-imageable">
-  <div class="control">
+  <div class="control is-flex is-justify-content-center">
     <%=
       image_tag @image.present? ? @image : '',
                 class: "rounded-image mb-2 #{ @image.present? ? '' : 'is-hidden' }",
-                data: { input_imageable_target: 'preview' }
+                data: @preview_data
     %>
   </div>
   <div class="control">
@@ -11,20 +11,17 @@
         <label class="file-label">
           <%= @form.file_field @attr,
                                class: @input_classes,
-                               data: {
-                                 input_imageable_target: 'input',
-                                 action: 'change->input-imageable#readFiles'
-                               }
+                               data: @field_data
           %>
           <span class="file-cta">
             <span class="file-icon">
-              <i class="fas fa-camera"></i>
+              <i class="fas fa-paperclip"></i>
             </span>
             <span class="file-label">
-              Attach Photo...
+              <%= @attr.to_s.titleize %>
             </span>
           </span>
-          <span class="file-name" data-input-imageable-target="name">
+          <span class="file-name" data-input-imageable-target="name" data-cookbook-ingredient-target="fileName">
             <%= @image&.filename&.to_s || '' %>
           </span>
         </label>

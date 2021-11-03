@@ -1,34 +1,39 @@
 <div class="field" data-controller="input-numeric">
   <%= @form.label @attr, class: 'label' %>
   <div class="field is-grouped">
-    <% @negative_steps.each do |step| %>
-      <div class="control">
-        <span
-          class="button is-danger"
-          data-action="click->input-numeric#remove"
-          data-step="<%= step %>"
-        >
-          -<%= step.to_s.gsub("0.", ".") %>
-        </span>
-      </div>
-    <% end %>
-
-    <div class="control is-expanded">
-      <%= @form.number_field @attr, class: @input_classes, step: @min_step, data: { input_numeric_target: 'input' } %>
+    <div class="control">
+      <span
+        class="button is-danger"
+        data-action="click->input-numeric#remove"
+        data-step="<%= @step %>"
+      >
+        -<%= @step.to_s.gsub("0.", ".") %>
+      </span>
     </div>
 
-    <% @positive_steps.each do |step| %>
-      <div class="control">
-        <span
-          class="button is-success"
-          data-action="click->input-numeric#add"
-          data-step="<%= step %>"
-        >
-          +<%= step.to_s.gsub("0.", ".") %>
-        </span>
-      </div>
-    <% end %>
+    <div class="control is-expanded">
+      <%=
+        @form.number_field @attr,
+                           class: @input_classes,
+                           step: @step,
+                           data: {
+                             input_numeric_target: 'input',
+                             action: 'change->input-numeric#validate'
+                           }
+      %>
+    </div>
+
+    <div class="control">
+      <span
+        class="button is-success"
+        data-action="click->input-numeric#add"
+        data-step="<%= @step %>"
+      >
+        +<%= @step.to_s.gsub("0.", ".") %>
+      </span>
+    </div>
   </div>
+
   <% @errors&.each do |error| %>
     <p class="help is-danger"><%= error %></p>
   <% end %>

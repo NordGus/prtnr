@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  recipe: one
+  ingredient: 
+  unit: one
+  amout: 9.99
+
+two:
+  recipe: two
+  ingredient: 
+  unit: two
+  amout: 9.99

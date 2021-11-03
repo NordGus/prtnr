@@ -3,7 +3,10 @@
 module Form
   module Input
     class TextComponent < ViewComponent::Base
-      def initialize(form:, attr:, model:)
+      def initialize(form:, attr:, model:, options: {})
+        defaults = { data: {} }
+
+        @options = defaults.merge!(options)
         @form = form
         @attr = attr
         @errors = model.errors&.full_messages_for(attr)

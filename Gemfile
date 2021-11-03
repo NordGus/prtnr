@@ -18,6 +18,8 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem "view_component", require: "view_component/engine"
 gem 'turbo-rails', '~> 7.1', '>= 7.1.1'
 
+gem 'ransack', '~> 2.4', '>= 2.4.2'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 

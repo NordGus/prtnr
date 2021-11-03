@@ -1,0 +1,12 @@
+<%= turbo_stream.replace :new_recipe_ingredient_button do %>
+  <%= render 'cookbook/recipe_ingredients/controls/new', recipe: @recipe %>
+<% end %>
+
+<%= turbo_stream.update :auxiliary_panel do %>
+  <div class="block">
+    <h1 class="title">New Ingredient</h1>
+    <p class="subtitle is-6">for <strong><%= @recipe.name %></strong></p>
+  </div>
+
+  <%= render 'form', recipe: @recipe, recipe_ingredient: @recipe_ingredient %>
+<% end %>

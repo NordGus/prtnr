@@ -22,10 +22,24 @@ export default class LayoutController extends Controller {
         event.preventDefault()
 
         const modal = this.modalTarget
-        const frame = this.modalContentTarget
+        const content = this.modalContentTarget
 
         modal.classList.toggle('is-hidden', true)
-        frame.innerHTML = ''
+        content.innerHTML = ''
+    }
+
+    async deployModal(event) {
+        event.preventDefault()
+
+        const modal = this.modalTarget
+        const href = event.currentTarget.href
+
+        modal.classList.toggle('is-hidden', false)
+        const response = await get(href, { responseKind: 'turbo-stream' })
+
+        if (!response.ok) {
+            modal.classList.toggle('is-hidden', true)
+        }
     }
 
     requestFromButton(event) {

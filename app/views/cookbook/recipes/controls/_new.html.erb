@@ -1,4 +1,4 @@
 <%=
-  render Layout::ActionButtonComponent.new url: new_cookbook_recipe_path(format: :turbo_stream), id: :new_button,
-                                           color: :success, icon_class: %w[fas fa-plus]
+  render Layout::ActionButtonComponent.new new_cookbook_recipe_path(format: :turbo_stream), id: :new_button,
+                                           icon_class: %w[fas fa-plus], options: { color: :success }
 %>

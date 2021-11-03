@@ -3,9 +3,13 @@
               form:       { id: @id },
               form_class: @form_class,
               target:     :_top,
-              method:     @method,
+              method:     @options[:method],
               data:       { action: 'click->layout#openModal click->layout#requestFromButton' } do %>
-  <span class="icon">
-    <%= tag.i '', class: @icon_class %>
-  </span>
+  <% if @icon_class.present? %>
+    <span class="icon">
+      <%= tag.i '', class: @icon_class %>
+    </span>
+  <% else %>
+    <%= content %>
+  <% end %>
 <% end %>

@@ -1,0 +1,7 @@
+<%= turbo_stream.remove dom_id(@recipe_ingredient) %>
+
+<%= turbo_stream.update :auxiliary_panel do %>
+  <%= render Notices::SuccessComponent.new do %>
+    <strong><%= @recipe_ingredient.ingredient.name.titleize %></strong> removed as a <strong><%= @recipe.name %></strong> ingredient!
+  <% end %>
+<% end %>

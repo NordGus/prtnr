@@ -13,7 +13,7 @@
   <% end %>
 </div>
 
-<div class="message mx-1 my-2">
+<div class="message mx-3 my-2">
   <div class="message-body">
     <% if @recipe.description.present? %>
       <%= @recipe.description %>
@@ -23,8 +23,8 @@
   </div>
 </div>
 
-<div data-controller="tabs">
-  <div class="tabs mx-1 mb-2 is-boxed is-fullwidth">
+<div data-controller="tabs" class="mx-3">
+  <div class="tabs mb-5 is-boxed is-fullwidth">
     <ul>
       <% %w[Preparation Ingredients].each do |tab| %>
         <li
@@ -39,7 +39,7 @@
     </ul>
   </div>
 
-  <div class="tab px-2" data-tabs-target="tab" data-tab-name="preparation">
+  <div class="" data-tabs-target="tab" data-tab-name="preparation">
     <% if recipe.preparation.present? %>
       <%= recipe.preparation %>
     <% else %>
@@ -47,7 +47,9 @@
     <% end %>
   </div>
 
-  <div class="tab px-2 is-hidden" data-tabs-target="tab" data-tab-name="ingredients">
-
+  <div class="is-hidden" data-tabs-target="tab" data-tab-name="ingredients">
+    <%= turbo_frame_tag :ingredients, src: cookbook_recipe_recipe_ingredients_url(recipe, format: :turbo_stream), class: 'is-block' do %>
+      <progress class="progress is-primary" max="100">0%</progress>
+    <% end %>
   </div>
 </div>

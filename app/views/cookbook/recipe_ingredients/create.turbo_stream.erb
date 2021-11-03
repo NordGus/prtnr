@@ -1,0 +1,11 @@
+<%= turbo_stream.remove :no_recipe_ingredients_placeholder %>
+
+<%= turbo_stream.append :ingredients do %>
+  <%= render Previews::RecipeIngredientComponent.new recipe_ingredient: @recipe_ingredient , recipe: @recipe %>
+<% end %>
+
+<%= turbo_stream.update :auxiliary_panel do %>
+  <%= render Notices::SuccessComponent.new do %>
+    <strong><%= @recipe_ingredient.ingredient.name.titleize %></strong> added to <strong><%= @recipe.name %></strong>!
+  <% end %>
+<% end %>
