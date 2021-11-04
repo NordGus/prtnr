@@ -16,6 +16,9 @@ import ImageableController from "../controllers/forms/inputs/imageable_controlle
 import DestroyableController from "../controllers/destroyable_controller";
 import SearchableController from "../controllers/searchable_controller";
 import IngredientController from "../controllers/cookbook/ingredient_controller";
+import CalendarController from "../controllers/calendar_controller";
+import CalendarGridController from "../controllers/calendar_grid_controller";
+import DietController from "../controllers/diet_controller";
 
 import 'trix'
 import '@rails/actiontext'
@@ -28,6 +31,11 @@ ActiveStorage.start()
 window.Stimulus = Application.start()
 Stimulus.register('layout', LayoutController)
 Stimulus.register('cookbook', BaseController)
+Stimulus.register('diet', DietController)
+Stimulus.register('calendar', CalendarController)
+Stimulus.register('calendar-grid', CalendarGridController)
+
+
 Stimulus.register('cookbook-ingredient', IngredientController)
 
 Stimulus.register('tabs', TabsController)

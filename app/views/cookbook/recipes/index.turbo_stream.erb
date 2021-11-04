@@ -1,6 +1,8 @@
 <%= turbo_stream.update :recipes do %>
   <% if @recipes.any? %>
-    <%= render Previews::RecipeComponent.with_collection @recipes %>
+    <% 10.times do %>
+      <%= render Previews::RecipeComponent.with_collection @recipes %>
+    <% end %>
   <% else %>
     <i id="no_recipes_placeholder" class="is-block p-3">Sorry, no recipes where found</i>
   <% end %>

@@ -98,10 +98,15 @@ body {
 
       .side-panel {
         z-index: 20;
+
         display: inline-flex;
-        flex-flow: row nowrap;
-        min-width: min-content;
+        flex-flow: column nowrap;
+        justify-content: space-between;
+        align-items: flex-end;
+
         background-color: transparent;
+
+        min-width: min-content;
 
         position: absolute;
         top: 0;
@@ -113,18 +118,10 @@ body {
           overflow-y: auto;
         }
 
-        .side-panel-controls {
-          width: min-content;
-        }
-
         &.is-expanded {
-          width: 100%;
-          height: 100%;
-          background-color: $primary-light;
-
-          .side-panel-controls {
-            padding-left: 0.25rem !important;
-          }
+          right: 0;
+          bottom: 0;
+          background-color: $link-light;
         }
       }
 
@@ -165,6 +162,76 @@ body {
               text-shadow: 0 0 5px $grey-dark;
             }
           }
+        }
+      }
+
+      .calendar {
+        display: grid;
+        grid-template-rows: min-content min-content min-content;
+        grid-template-areas:
+                "calendar-header"
+                "calendar-content"
+                "calendar-control";
+
+        .calendar-header {
+          display: grid;
+          grid-area: calendar-header;
+          grid-template-columns: repeat(7, 1fr);
+          grid-gap: 0.5rem;
+
+          .day {
+            background-color: $link;
+            color: $white;
+            border-radius: $radius;
+            text-align: center;
+          }
+        }
+
+        .calendar-content {
+          display: grid;
+          grid-area: calendar-content;
+          grid-template-columns: repeat(7, 1fr);
+          grid-gap: 0.5rem;
+
+          .day {
+            background-color: transparent;
+            height: 4rem;
+            border-radius: $radius;
+            color: $link;
+
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: space-between;
+            align-items: center;
+
+            .date {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              height: 1.5rem;
+              width: 1.5rem;
+
+              &.today {
+                border-radius: $radius-rounded;
+                background-color: $link;
+                color: $white;
+              }
+            }
+
+            &.is-active {
+              background-color: $link;
+              color: $white;
+
+              .date.today {
+                background-color: $white;
+                color: $link;
+              }
+            }
+          }
+        }
+
+        .calendar-control {
+          grid-area: calendar-control;
         }
       }
     }

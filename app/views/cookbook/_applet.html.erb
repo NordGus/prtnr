@@ -3,26 +3,25 @@
 <%= turbo_stream_from :cookbook %>
 
 <div class="side-panel <%= expanded ? 'is-expanded' : '' %>" data-cookbook-target="panel">
-  <div class="side-panel-body pt-3 pr-1 pl-3 <%= expanded ? '' : 'is-hidden' %>" data-cookbook-target="panelContent">
+  <span
+    class="button m-3 is-link <%= expanded ? 'is-focused' : '' %>"
+    data-action="click->cookbook#togglePanel"
+    data-cookbook-target="toggle"
+  >
+    <span class="icon">
+      <i class="fas fa-bookmark <%= expanded ? 'is-hidden' : '' %>" data-cookbook-target="toggleIcon"></i>
+      <i class="fas fa-times <%= expanded ? '' : 'is-hidden' %>" data-cookbook-target="toggleIcon"></i>
+    </span>
+  </span>
+
+  <div class="side-panel-body px-3 pb-3 <%= expanded ? '' : 'is-hidden' %>" data-cookbook-target="content">
     <%= turbo_frame_tag :recipes, src: cookbook_recipes_url(format: :turbo_stream), class: 'is-block' do %>
       <progress class="progress is-primary" max="100">0%</progress>
     <% end %>
   </div>
-
-  <div class="side-panel-controls p-3">
-    <button
-      class="button is-primary <%= expanded ? 'is-focused' : '' %>"
-      data-action="click->cookbook#togglePanel"
-      data-cookbook-target="panelToggle"
-    >
-      <span class="icon">
-        <i class="fas fa-bookmark"></i>
-      </span>
-    </button>
-  </div>
 </div>
 
-<div class="recipe-container pb-2">
+<div class="recipe-container pb-3">
   <%= turbo_frame_tag :recipe do %>
     <%= yield %>
   <% end %>

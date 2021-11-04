@@ -1,0 +1,16 @@
+<div
+  class="day p-1 <%= selected ? 'is-active' : '' %>"
+  id="<%= date.strftime("%Y_%m_%d") %>"
+  <% if is_first %>
+    data-calendar-grid-target="first"
+    data-weekday="<%= date.cwday %>"
+  <% end %>
+>
+  <span class="date <%= is_current_date ? 'today' : '' %>">
+    <%= date.day %>
+  </span>
+
+  <span>
+    <i class="fas fa-utensils"></i> <%= item_count %>
+  </span>
+</div>

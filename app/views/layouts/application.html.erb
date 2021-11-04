@@ -33,14 +33,14 @@
         </div>
       <% end %>
       <%=
-        render Nav::LinkComponent.new url: cookbook_path,
+        render Nav::LinkComponent.new url: cookbook_url,
                                       text: 'Cookbook',
                                       icon_class: %w[fas fa-book-open],
                                       active: active_nav_link(:cookbook)
       %>
 
       <%=
-        render Nav::LinkComponent.new url: '#',
+        render Nav::LinkComponent.new url: diet_url,
                                       text: 'Diet',
                                       icon_class: %w[fas fa-calendar],
                                       active: active_nav_link(:diet)

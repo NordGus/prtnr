@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   root to: 'application#applet'
 
-  get '/cookbook', to: 'cookbook#applet'
+  get :cookbook, to: 'cookbook#applet'
+  get :diet, to: 'diet#applet'
 
   namespace :cookbook do
     resources :ingredients, only: [] do

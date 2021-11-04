@@ -1,9 +1,9 @@
 import { Controller } from "@hotwired/stimulus";
 
-export default class BaseController extends Controller {
+export default class DietController extends Controller {
     static targets = [ 'panel', 'content', 'toggle', 'toggleIcon' ]
 
-    togglePanel(_event) {
+    toggle(_event) {
         this.panelTarget.classList.toggle('is-expanded')
 
         this.contentTarget.classList.toggle('is-hidden')
