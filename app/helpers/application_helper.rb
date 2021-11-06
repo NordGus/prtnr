@@ -28,4 +28,20 @@ module ApplicationHelper
   def active_nav_link(namespace)
     params[:controller].to_s.include? namespace.to_s
   end
+
+  def date_as_id(date)
+    date.strftime('%Y_%m_%d')
+  end
+
+  def date_as_calendar_id(date)
+    date.strftime('%Y_%m')
+  end
+
+  def date_as_menu_title(date)
+    date.strftime('%B %-d %Y')
+  end
+
+  def date_weekday(date)
+    date.strftime('%A')
+  end
 end

@@ -6,5 +6,5 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Inventory::Unit::Unitable.find_or_create_by! name: :units
-Inventory::Unit::Unitable.find_or_create_by! name: :little_spoons
+Inventory::Unit::Unitable.find_or_create_by(name: 'units')
+Inventory::Unit::Unitable.find_or_create_by(name: 'little spoons')

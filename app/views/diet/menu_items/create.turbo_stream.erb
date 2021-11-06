@@ -1,0 +1,15 @@
+<%= turbo_stream.remove :no_menu_items_placeholder %>
+
+<%= turbo_stream.update "#{date_as_id(@menu_item.date)}_count" do %>
+  <%= Diet::Menu::Item.where(date: @menu_item.date).count %>
+<% end %>
+
+<%= turbo_stream.append "#{date_as_id(@menu_item.date)}_menu_items" do %>
+  <%= render 'diet/menu_items/menu_item', menu_item: @menu_item %>
+<% end %>
+
+<%= turbo_stream.update :auxiliary_panel do %>
+  <%= render Notices::SuccessComponent.new do %>
+    <strong><%= @menu_item.recipe.name %></strong> added to <strong><%= date_weekday(@menu_item.date) %>, <%= date_as_menu_title(@menu_item.date) %>'s</strong> menu!
+  <% end %>
+<% end %>

@@ -1,0 +1,84 @@
+<%= turbo_stream.update :calendar do %>
+  <div class="calendar-header p-0 mt-auto">
+    <% %w[Sun Mon Tue Wen Thu Fri Sat].each do |day| %>
+      <span class="p-1 day"><%= day %></span>
+    <% end %>
+  </div>
+
+  <div class="calendar-content p-0 my-3" data-controller="calendar-grid">
+    <% @days.each do |date| %>
+      <%=
+        render 'diet/calendar/day',
+               date: date,
+               selected: date == @selected,
+               is_first: date == @month.beginning_of_month,
+               is_current_date: date == @today
+      %>
+    <% end %>
+  </div>
+
+  <div class="calendar-control">
+    <div class="field is-grouped">
+      <div class="control">
+        <span class="button" data-action="click->calendar#prevMonth">
+          <span class="icon">
+            <i class="fas fa-arrow-left"></i>
+          </span>
+        </span>
+      </div>
+
+      <div class="control is-expanded">
+        <div class="select is-fullwidth">
+          <select data-calendar-target="month" data-action="change->calendar#refresh">
+            <% %w[January February March April May June July August September October November December].each_with_index do |month, idx| %>
+              <option
+                <% if @month.month == idx + 1%>
+                selected
+                <% end %>
+                value="<%= idx + 1 %>"
+              >
+                <%= month %>
+              </option>
+            <% end %>
+          </select>
+        </div>
+      </div>
+
+      <div class="control">
+        <span class="button" data-action="click->calendar#nextMonth">
+          <span class="icon">
+            <i class="fas fa-arrow-right"></i>
+          </span>
+        </span>
+      </div>
+    </div>
+
+    <div class="field is-grouped">
+      <div class="control">
+        <span class="button" data-action="click->calendar#prevYear">
+          <span class="icon">
+            <i class="fas fa-arrow-left"></i>
+          </span>
+        </span>
+      </div>
+
+      <div class="control is-expanded">
+        <input
+          type="number"
+          class="input"
+          value="<%= @month.year %>"
+          data-calendar-target="year"
+          data-action="change->calendar#refresh"
+        >
+      </div>
+
+      <div class="control">
+        <span class="button" data-action="click->calendar#nextYear">
+          <span class="icon">
+            <i class="fas fa-arrow-right"></i>
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+<% end %>

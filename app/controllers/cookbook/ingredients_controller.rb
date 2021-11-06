@@ -3,8 +3,6 @@
 module Cookbook
   # Cookbook::IngredientsController main recipes controller
   class IngredientsController < CookbookController
-    layout false
-
     before_action :filter_searches, only: :search
 
     def search
@@ -16,7 +14,7 @@ module Cookbook
     def filter_searches
       search_term = search_params[:q][:name_cont]
 
-      head(:no_content) unless search_term.present? && search_term.length >= 3
+      head(:no_content) unless search_term.present?
     end
 
     def search_params

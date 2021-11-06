@@ -1,0 +1,11 @@
+<%= turbo_stream.remove dom_id(@menu_item) %>
+
+<%= turbo_stream.update "#{date_as_id(@menu_item.date)}_count" do %>
+  <%= Diet::Menu::Item.where(date: @menu_item.date).count %>
+<% end %>
+
+<%= turbo_stream.update :auxiliary_panel do %>
+  <%= render Notices::SuccessComponent.new do %>
+    <strong><%= @menu_item.recipe.name %></strong> removed from <strong><%= date_weekday(@menu_item.date) %>, <%= date_as_menu_title(@menu_item.date) %>'s</strong> ingredient!
+  <% end %>
+<% end %>

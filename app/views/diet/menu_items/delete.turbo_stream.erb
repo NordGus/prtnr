@@ -1,0 +1,9 @@
+<%= turbo_stream.replace "#{dom_id(@menu_item)}_destroy_button" do %>
+  <%= render 'diet/menu_items/controls/destroy', menu_item: @menu_item %>
+<% end %>
+
+<%= turbo_stream.update :auxiliary_panel do %>
+  <%= render Notices::DestroyComponent.new url: diet_menu_menu_item_url(@menu_item, menu_id: date_as_id(@menu_item.date), format: :turbo_stream) do %>
+    Do you want to remove <strong><%= @menu_item.recipe.name %></strong> from <strong><%= date_weekday(@menu_item.date) %>, <%= date_as_menu_title(@menu_item.date) %>'s</strong> menu?
+  <% end %>
+<% end %>

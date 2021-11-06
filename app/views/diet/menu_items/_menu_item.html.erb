@@ -1,0 +1,20 @@
+<div id="<%= dom_id menu_item %>" class="is-flex mb-3">
+  <div class="is-flex is-flex-direction-column is-align-items-center is-justify-content-flex-end">
+    <div class="servings py-3">
+      <span class="fas fa-user fa-lg"></span>
+      <span><%= menu_item.portions %></span>
+    </div>
+
+    <div class="mt-1">
+      <%= render 'diet/menu_items/controls/destroy', menu_item: menu_item %>
+    </div>
+
+<!--    <div class="mt-1">-->
+      <%#= render 'diet/menu_items/controls/destroy', menu_item: menu_item %>
+<!--    </div>-->
+  </div>
+
+  <div class="ml-1 is-flex-grow-1">
+    <%= render Previews::RecipeComponent.new recipe: menu_item.recipe %>
+  </div>
+</div>

@@ -5,11 +5,12 @@ module Previews
   class RecipeComponent < ViewComponent::Base
     with_collection_parameter :recipe
 
-    def initialize(recipe:, style: :link)
-      raise ArgumentError, 'style' unless %i[link].include? style
+    def initialize(recipe:, style: :link, options: {})
+      raise NotImplementedError, "style #{style}" unless %i[link search].include? style
 
       @recipe = recipe
       @style = style
+      @options = options
 
       super
     end

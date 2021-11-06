@@ -6,7 +6,7 @@ module Inventory
     class Base < ::ApplicationRecord
       self.table_name = :inventory_units
 
-      before_validation :underscore_name, if: :name_present?
+      before_save :underscore_name, if: :name_present?
 
       after_initialize :titleize_name
 

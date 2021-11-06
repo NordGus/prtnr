@@ -1,16 +1,24 @@
-<div
-  class="day p-1 <%= selected ? 'is-active' : '' %>"
-  id="<%= date.strftime("%Y_%m_%d") %>"
-  <% if is_first %>
-    data-calendar-grid-target="first"
-    data-weekday="<%= date.cwday %>"
-  <% end %>
->
+<%=
+  link_to diet_menu_menu_items_url(menu_id: date_as_id(date)),
+          class: "day p-1 #{ selected ? 'is-active' : '' }",
+          id: date_as_id(date),
+          target: :_top,
+          data: {
+            calendar_target: 'day',
+            action: 'click->calendar#select click->calendar#display click->diet#toggle',
+            calendar_grid_target: is_first ? 'first' : nil,
+            weekday: date.cwday,
+          } do
+%>
   <span class="date <%= is_current_date ? 'today' : '' %>">
     <%= date.day %>
   </span>
 
   <span>
-    <i class="fas fa-utensils"></i> <%= item_count %>
+    <i class="fas fa-utensils mr-1"></i>
+      <%= turbo_frame_tag "#{date_as_id(date)}_count",
+                          src: count_diet_menu_menu_items_url(menu_id: date_as_id(date), format: :turbo_stream) do %>
+        <i class="fas fa-sync fa-xs"></i>
+      <% end %>
   </span>
-</div>
+<% end %>

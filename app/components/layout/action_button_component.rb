@@ -6,7 +6,7 @@ module Layout
     include Bulma::ButtonHelper
 
     def initialize(url, icon_class: nil, id: :action_button, options: {})
-      @options = { color: :default, method: :get, fullwidth: false, spaced: true }.merge!(options)
+      @options = { color: :default, method: :get, fullwidth: false, spaced: true }.deep_merge(options)
 
       @url = url
       @button_class = button_class(@options)

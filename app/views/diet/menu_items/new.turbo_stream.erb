@@ -1,0 +1,12 @@
+<%= turbo_stream.replace :new_button do %>
+  <%= render 'diet/menu_items/controls/new', menu_id: date_as_id(@date) %>
+<% end %>
+
+<%= turbo_stream.update :auxiliary_panel do %>
+  <div class="block">
+    <h1 class="title">New Item</h1>
+    <p class="subtitle is-6">for <strong><%= date_weekday(@date) %>, <%= date_as_menu_title(@date) %></strong></p>
+  </div>
+
+  <%= render 'form', menu_item: @menu_item %>
+<% end %>

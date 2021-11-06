@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
+# CookbookController
 class CookbookController < ActionController::Base
-  layout 'application'
+  layout false
 
   before_action :set_applet_controller
-
-  def applet; end
 
   private
 

@@ -21,8 +21,6 @@
   </div>
 </div>
 
-<div class="recipe-container pb-3">
-  <%= turbo_frame_tag :recipe do %>
-    <%= yield %>
-  <% end %>
+<div class="resource-container recipe pb-3" id="recipe" data-turbo>
+  <%= yield %>
 </div>

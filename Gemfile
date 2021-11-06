@@ -16,7 +16,7 @@ gem 'image_processing', '~> 1.2'
 
 gem 'bootsnap', '>= 1.4.4', require: false
 gem "view_component", require: "view_component/engine"
-gem 'turbo-rails', '~> 7.1', '>= 7.1.1'
+gem 'turbo-rails', '~> 0.8.3'
 
 gem 'ransack', '~> 2.4', '>= 2.4.2'
 

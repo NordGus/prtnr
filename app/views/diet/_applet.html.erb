@@ -1,4 +1,4 @@
-<% expanded ||= true %>
+<% expanded ||= false %>
 
 <%= turbo_stream_from :diet %>
 
@@ -20,71 +20,22 @@
     </span>
   </div>
 
-  <div
-    class="calendar m-0 p-3 mt-auto <%= expanded ? '' : 'is-hidden' %>" data-calendar-today-value="<%= @today.strftime("%Y_%m_%d") %>"
-    data-diet-target="content"
-    data-controller="calendar"
-  >
-    <div class="calendar-header p-0 mt-auto">
-      <% %w[Sun Mon Tue Wen Thu Fri Sat].each do |day| %>
-        <span class="p-1 day"><%= day %></span>
-      <% end %>
-    </div>
-
-    <div class="calendar-content p-0 my-3" data-controller="calendar-grid">
-      <% (@today.beginning_of_month..@today.end_of_month).each do |date| %>
-        <%=
-          render 'diet/calendar/day',
-                 date: date,
-                 selected: date.day == @today.day,
-                 is_first: date.day == 1,
-                 item_count: date.day % 10,
-                 is_current_date: date == @today
-        %>
-      <% end %>
-    </div>
-
-    <div class="calendar-control">
-      <div class="field">
-        <div class="control">
-          <div class="select is-fullwidth">
-            <select>
-              <% %w[January February March April May June July August September October November December].each_with_index do |month, idx| %>
-                <option
-                  <% if @today.month == idx + 1%>
-                  selected
-                  <% end %>
-                  value="<%= idx + 1 %>"
-                  >
-                  <%= month %>
-                </option>
-              <% end %>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <div class="field is-grouped">
-        <div class="control">
-        <span class="button">
-          <span class="icon">
-            <i class="fas fa-arrow-left"></i>
-          </span>
-        </span>
-        </div>
-
-        <div class="control is-expanded">
-          <input type="number" class="input" value="<%= @today.year %>">
-        </div>
-
-        <div class="control">
-        <span class="button">
-          <span class="icon">
-            <i class="fas fa-arrow-right"></i>
-          </span>
-        </span>
-        </div>
-      </div>
-    </div>
-  </div>
+  <%= turbo_frame_tag :calendar,
+                      src: calendar_diet_menu_url(id: date_as_calendar_id(@today), format: :turbo_stream),
+                      class: "calendar m-0 p-3 mt-auto #{expanded ? '' : 'is-hidden'}",
+                      data: {
+                        controller: 'calendar',
+                        calendar_selected_value: date_as_id(@today),
+                        calendar_base_url_value: diet_menu_index_url,
+                        diet_target: 'content'
+                      } do %>
+  <% end %>
 </div>
+
+<%= turbo_frame_tag :menu,
+                    src: diet_menu_menu_items_url(menu_id: date_as_id(@today), format: :turbo_stream),
+                    class: "resource-container diet pb-3" do %>
+  <div class="mt-6 pt-6 mx-3">
+    <progress class="progress is-primary" max="100">0%</progress>
+  </div>
+<% end %>

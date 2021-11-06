@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus";
-import {FetchRequest, post} from "@rails/request.js";
+import {FetchRequest} from "@rails/request.js";
 
 export default class SearchableController extends Controller {
     static values = { endpoint: String }

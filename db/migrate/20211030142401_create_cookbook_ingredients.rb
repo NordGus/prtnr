@@ -7,8 +7,8 @@ class CreateCookbookIngredients < ActiveRecord::Migration[6.1]
       t.string :name, null: false
 
       t.timestamps
-    end
 
-    add_index :cookbook_ingredients, :name, unique: true
+      t.index :name, name: :cookbook_ingredients_name_index, unique: true
+    end
   end
 end

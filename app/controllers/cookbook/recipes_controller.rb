@@ -3,12 +3,13 @@
 module Cookbook
   # RecipesController main recipes controller
   class RecipesController < CookbookController
-    layout false
-
     before_action :set_recipe, only: %i[show edit update delete destroy]
 
     def index
-      @recipes = Cookbook::Recipe.order(id: :asc).all
+      respond_to do |format|
+        format.turbo_stream { @recipes = Cookbook::Recipe.order(id: :asc).all }
+        format.html { render layout: 'application' }
+      end
     end
 
     def show
@@ -36,7 +37,7 @@ module Cookbook
     def destroy
       @recipe.destroy
 
-      redirect_to cookbook_url, method: :get
+      redirect_to cookbook_recipes_url, method: :get
     end
 
     private

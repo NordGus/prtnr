@@ -1,0 +1,22 @@
+<%= turbo_stream.replace :new_button do %>
+  <%= render 'diet/menu_items/controls/new', menu_id: date_as_id(@date) %>
+<% end %>
+
+<%= turbo_stream.update :menu do %>
+  <div class="header has-background-link-light">
+    <div class="header-content p-3 pt-6 mt-3">
+      <h1 class="title"><%= date_as_menu_title(@date) %></h1>
+      <p class="subtitle is-5"><%= date_weekday(@date) %></p>
+    </div>
+  </div>
+
+  <div id="<%= date_as_id(@date) %>_menu_items" class="menu-items px-3 py-0 pt-3">
+    <% if @menu_items.any? %>
+      <% @menu_items.each do |menu_item| %>
+        <%= render 'diet/menu_items/menu_item', menu_item: menu_item %>
+      <% end %>
+    <% else %>
+      <i id="no_menu_items_placeholder" class="is-block py-3">Sorry, today's menu is empty</i>
+    <% end %>
+  </div>
+<% end %>

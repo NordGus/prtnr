@@ -1,10 +1,10 @@
 <% case @style %>
 <% when :link %>
-  <div class="is-flex" id="<%= dom_id @recipe_ingredient %>">
+  <div class="is-flex is-align-items-flex-end mb-3" id="<%= dom_id @recipe_ingredient %>">
     <%= render 'cookbook/recipe_ingredients/controls/destroy', recipe: @recipe, recipe_ingredient: @recipe_ingredient %>
 
     <%= link_to edit_cookbook_recipe_recipe_ingredient_url(@recipe, @recipe_ingredient),
-                class: 'preview is-small ml-1 mb-1 has-background-primary',
+                class: 'preview is-small ml-1 has-background-primary',
                 data: { action: 'click->layout#deployModal' } do %>
 
       <div class="data p-2 <%= @recipe_ingredient.ingredient.cover_image.present? ? 'has-shadow' : '' %>">

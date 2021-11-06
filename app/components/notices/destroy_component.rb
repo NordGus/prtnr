@@ -6,7 +6,7 @@ module Notices
     def initialize(url:, data: {})
       raise ArgumentError, 'url' unless url.present?
 
-      @data = { destroyable_target: 'button', action: '' }.merge!(data)
+      @data = { destroyable_target: 'button', action: '' }.deep_merge(data)
       @data[:action] += ' click->layout#requestFromButton click->destroyable#destroy'
       @url = url
 

@@ -1,6 +1,5 @@
-<% case @style %>
-<% when :link %>
-  <%= link_to @recipe, class: 'preview mb-1 has-background-primary', id: dom_id(@recipe), target: :_top do %>
+<% if @style == :link %>
+  <%= link_to @recipe, class: 'preview mb-3 has-background-link', id: dom_id(@recipe), target: :_top do %>
     <div class="data p-2 <%= @recipe.cover_image.present? ? 'has-shadow' : '' %>">
       <h3 class="title has-text-white is-4"><%= @recipe.name %></h3>
       <p class="subtitle has-text-white is-6"><%= @recipe.description.truncate(52) %></p>
@@ -9,4 +8,17 @@
       <%= image_tag @recipe.cover_image %>
     <% end %>
   <% end %>
+<% end %>
+<% if @style == :search %>
+  <%=
+      tag.span @recipe.name,
+               class: 'button m-2',
+               data: {
+                 action: 'click->diet-menu-item#select',
+                 diet_menu_item_target: 'result',
+                 id: @recipe.id,
+                 preview: @recipe.cover_image.attached? ? url_for(@recipe.cover_image) : '',
+                 name: @recipe.name
+               }
+  %>
 <% end %>

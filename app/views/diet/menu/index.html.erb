@@ -1,0 +1,7 @@
+<%= content_for :applet_controls do %>
+  <%= render 'diet/menu_items/controls/new', menu_id: date_as_id(@selected) %>
+<% end %>
+
+<%= content_for :applet do %>
+  <%= render 'diet/applet' %>
+<% end %>

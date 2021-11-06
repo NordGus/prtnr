@@ -19,6 +19,7 @@ import IngredientController from "../controllers/cookbook/ingredient_controller"
 import CalendarController from "../controllers/calendar_controller";
 import CalendarGridController from "../controllers/calendar_grid_controller";
 import DietController from "../controllers/diet_controller";
+import MenuItemController from "../controllers/diet/menu_item_controller";
 
 import 'trix'
 import '@rails/actiontext'
@@ -35,8 +36,8 @@ Stimulus.register('diet', DietController)
 Stimulus.register('calendar', CalendarController)
 Stimulus.register('calendar-grid', CalendarGridController)
 
-
 Stimulus.register('cookbook-ingredient', IngredientController)
+Stimulus.register('diet-menu-item', MenuItemController)
 
 Stimulus.register('tabs', TabsController)
 Stimulus.register('destroyable', DestroyableController)

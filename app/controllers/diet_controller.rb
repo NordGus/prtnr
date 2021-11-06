@@ -2,13 +2,9 @@
 
 # DietController
 class DietController < ActionController::Base
-  layout 'application'
+  layout false
 
   before_action :set_applet_controller
-
-  def applet
-    @today = Date.today
-  end
 
   private
 

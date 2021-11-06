@@ -6,8 +6,8 @@ class CreateCookbookRecipes < ActiveRecord::Migration[6.1]
       t.integer :portions, default: 0, null: false
 
       t.timestamps
-    end
 
-    add_index :cookbook_recipes, :name, unique: true
+      t.index :name, name: :cookbook_recipes_name_index, unique: true
+    end
   end
 end

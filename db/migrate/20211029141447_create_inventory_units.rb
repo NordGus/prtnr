@@ -8,8 +8,8 @@ class CreateInventoryUnits < ActiveRecord::Migration[6.1]
       t.string :name, null: false
 
       t.timestamps
-    end
 
-    add_index :inventory_units, %i[type name], unique: true, name: :index_inventory_unit_type_name_uniqueness
+      t.index %i[type name], name: :inventory_units_type_name_index, unique: true
+    end
   end
 end

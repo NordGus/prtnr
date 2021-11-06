@@ -3,8 +3,6 @@
 module Cookbook
   # RecipeIngredientsController main recipes controller
   class RecipeIngredientsController < CookbookController
-    layout false
-
     before_action :set_recipe
     before_action :set_recipe_ingredient, only: %i[edit update delete destroy]
 
