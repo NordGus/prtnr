@@ -1,6 +1,19 @@
+<%
+  edit ||= false
+
+  url = if edit
+          diet_menu_menu_item_url(menu_item, menu_id: date_as_id(menu_item.date || @date))
+        else
+          diet_menu_menu_items_url(menu_id: date_as_id(menu_item.date || @date))
+        end
+
+  method = edit ? :put : :post
+%>
+
 <%= form_with(model: menu_item,
-              url: diet_menu_menu_items_url(menu_id: date_as_id(menu_item.date)),
+              url: url,
               scope: :menu_item,
+              method: method,
               data: {
                 controller: 'searchable diet-menu-item',
                 searchable_endpoint_value: search_diet_recipes_url(format: :turbo_stream)
@@ -24,7 +37,7 @@
       <div class="buttons is-centered m-0 p-0" id="recipe_search_results"></div>
 
       <div class="field">
-        <%= recipe_form.label :name, class: 'label' %>
+        <%= recipe_form.label :name, 'Recipe', class: 'label' %>
         <div class="control">
           <%=
             recipe_form.text_field :name,
@@ -35,6 +48,11 @@
                                    }
           %>
         </div>
+        <% if menu_item.errors&.full_messages_for(:recipe)&.any? %>
+          <% menu_item.errors.full_messages_for(:recipe).each do |error| %>
+            <p class="help is-danger"><%= error %></p>
+          <% end %>
+        <% end %>
       </div>
     <% end %>
 
@@ -45,6 +63,11 @@
       <div class="control">
         <%= form.date_field :date, class: 'input' %>
       </div>
+      <% if menu_item.errors&.full_messages_for(:date)&.any? %>
+        <% menu_item.errors.full_messages_for(:date).each do |error| %>
+          <p class="help is-danger"><%= error %></p>
+        <% end %>
+      <% end %>
     </div>
   </div>
 

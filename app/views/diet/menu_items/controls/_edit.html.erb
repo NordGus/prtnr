@@ -1,0 +1,5 @@
+<%=
+  render Layout::ActionButtonComponent.new edit_diet_menu_menu_item_url(menu_item, menu_id: date_as_id(menu_item.date), format: :turbo_stream),
+                                           id: "#{dom_id(menu_item)}_edit_button", icon_class: %w[fas fa-pen],
+                                           options: { color: :info, spaced: false }
+%>

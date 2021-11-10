@@ -1,0 +1,12 @@
+<%= turbo_stream.replace "#{dom_id(@menu_item)}_edit_button" do %>
+  <%= render 'diet/menu_items/controls/edit', menu_item: @menu_item %>
+<% end %>
+
+<%= turbo_stream.update :auxiliary_panel do %>
+  <div class="block">
+    <h1 class="title">Edit Item</h1>
+    <p class="subtitle is-6">for <strong><%= date_weekday(@date) %>, <%= date_as_menu_title(@date) %></strong></p>
+  </div>
+
+  <%= render 'form', menu_item: @menu_item, edit: true %>
+<% end %>

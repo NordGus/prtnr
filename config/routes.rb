@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     resources :menu, only: :index do
       get :calendar, on: :member
 
-      resources :menu_items, only: %i[index new create destroy] do
+      resources :menu_items, only: %i[index new create edit update destroy] do
         get :delete, on: :member
         get :count, on: :collection
       end

@@ -4,7 +4,7 @@ module Diet
   # Diet::MenuItemsController
   class MenuItemsController < DietController
     before_action :set_date
-    before_action :set_menu_item, only: %i[delete destroy]
+    before_action :set_menu_item, only: %i[edit update delete destroy]
 
     def index
       @menu_items = Diet::Menu::Item.includes(:recipe).where(date: @date)
@@ -18,6 +18,12 @@ module Diet
       @menu_item = Diet::Menu::Item.new(menu_item_params)
 
       render :new unless @menu_item.save
+    end
+
+    def edit; end
+
+    def update
+      render :edit unless @menu_item.update(menu_item_params)
     end
 
     def delete; end
