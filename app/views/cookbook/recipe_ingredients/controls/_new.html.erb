@@ -1,6 +1,11 @@
 <%=
-  render Layout::ActionButtonComponent.new(
-    new_cookbook_recipe_recipe_ingredient_url(recipe: recipe, format: :turbo_stream), id: :new_recipe_ingredient_button,
-    options: { color: :success, fullwidth: true }
-  ).with_content('Add Ingredient')
+  render Layout::Actions::ButtonComponent.new new_cookbook_recipe_recipe_ingredient_url(recipe: recipe, format: :turbo_stream),
+                                              options: {
+                                                id: :new_recipe_ingredient_button,
+                                                color: :success,
+                                                fullwidth: true,
+                                                show_content: true
+                                              } do
 %>
+  Add Ingredient
+<% end %>

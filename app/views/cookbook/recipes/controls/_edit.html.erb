@@ -1,4 +1,5 @@
 <%=
-  render Layout::ActionButtonComponent.new edit_cookbook_recipe_path(recipe, format: :turbo_stream), id: :edit_button,
-                                           icon_class: %w[fas fa-pen], options: { color: :info }
+  render Layout::Actions::ButtonComponent.new edit_cookbook_recipe_path(recipe, format: :turbo_stream),
+                                              icon: FontAwesome::Icon::FasComponent.new('pen'),
+                                              options: { id: :edit_button, color: :info, form_class: 'ml-3' }
 %>

@@ -1,5 +1,5 @@
 <%=
-  render Layout::ActionButtonComponent.new delete_cookbook_recipe_path(recipe, format: :turbo_stream), id: :destroy_button,
-                                           icon_class: %w[fas fa-trash], options: { color: :danger }
+  render Layout::Actions::ButtonComponent.new delete_cookbook_recipe_path(recipe, format: :turbo_stream),
+                                              icon: FontAwesome::Icon::FasComponent.new('trash'),
+                                              options: { id: :destroy_button, color: :danger, form_class: 'ml-3' }
 %>
-

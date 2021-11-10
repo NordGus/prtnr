@@ -1,0 +1,15 @@
+<%= button_to @action_url,
+              class:      @options[:class],
+              form:       { id: @options[:id] },
+              form_class: @options[:form_class],
+              target:     :_top,
+              method:     @options[:method],
+              data:       { action: 'click->layout#openModal click->layout#requestFromButton' } do %>
+  <% if @options[:show_content].present? %>
+    <%= content %>
+  <% else %>
+    <span class="icon">
+      <%= render @icon || FontAwesome::Icon::FasComponent.new('terminal') %>
+    </span>
+  <% end %>
+<% end %>
