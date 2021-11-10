@@ -1,5 +1,5 @@
 <%=
-  render Layout::Actions::ButtonComponent.new delete_cookbook_recipe_recipe_ingredient_url(recipe, recipe_ingredient, format: :turbo_stream),
-                                              icon: FontAwesome::Icon::FasComponent.new('trash'),
-                                              options: { id: :destroy_button, color: :danger }
+  render Layout::Actions::ModalTriggerComponent.new delete_cookbook_recipe_recipe_ingredient_url(recipe, recipe_ingredient, format: :turbo_stream),
+                                                    icon: FontAwesome::Icon::FasComponent.new('trash'),
+                                                    options: { id: :destroy_button, color: :danger }
 %>

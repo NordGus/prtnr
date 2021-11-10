@@ -1,6 +1,6 @@
 <%=
-  render Layout::Actions::ButtonComponent.new new_cookbook_recipe_recipe_ingredient_url(recipe: recipe, format: :turbo_stream),
-                                              options: {
+  render Layout::Actions::ModalTriggerComponent.new new_cookbook_recipe_recipe_ingredient_url(recipe: recipe, format: :turbo_stream),
+                                                    options: {
                                                 id: :new_recipe_ingredient_button,
                                                 color: :success,
                                                 fullwidth: true,

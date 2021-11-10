@@ -1,5 +1,5 @@
 <%=
-  render Layout::Actions::ButtonComponent.new new_cookbook_recipe_path(format: :turbo_stream),
-                                              icon: FontAwesome::Icon::FasComponent.new('plus'),
-                                              options: { id: :new_button, color: :success, form_class: 'ml-3' }
+  render Layout::Actions::ModalTriggerComponent.new new_cookbook_recipe_path(format: :turbo_stream),
+                                                    icon: FontAwesome::Icon::FasComponent.new('plus'),
+                                                    options: { id: :new_button, color: :success, form_class: 'ml-3' }
 %>

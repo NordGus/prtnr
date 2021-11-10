@@ -1,5 +1,5 @@
 <%=
-  render Layout::Actions::ButtonComponent.new new_diet_menu_menu_item_url(menu_id: menu_id,format: :turbo_stream),
-                                              icon: FontAwesome::Icon::FasComponent.new('plus'),
-                                              options: { id: :new_button, color: :success }
+  render Layout::Actions::ModalTriggerComponent.new new_diet_menu_menu_item_url(menu_id: menu_id, format: :turbo_stream),
+                                                    icon: FontAwesome::Icon::FasComponent.new('plus'),
+                                                    options: { id: :new_button, color: :success }
 %>

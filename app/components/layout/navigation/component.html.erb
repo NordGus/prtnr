@@ -1,0 +1,15 @@
+<%= tag.nav class: @class, data: { layout_target: 'navigation' } do %>
+  <% unless in_root? %>
+    <div class="cancel p-3">
+      <div class="button is-primary" data-action="click->layout#toggleNavigation">
+        <span class="icon">
+          <%= render FontAwesome::Icon::FasComponent.new 'times' %>
+        </span>
+      </div>
+    </div>
+  <% end %>
+
+  <% links.each do |link| %>
+    <%= link %>
+  <% end %>
+<% end %>

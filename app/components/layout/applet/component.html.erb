@@ -1,0 +1,22 @@
+<%= tag.div class: @class,
+            data: {
+              controller: @data_controller,
+              layout_target: 'applet'
+            } do %>
+  <div
+    class="controlbar is-flex is-justify-content-space-between p-3 has-background-primary-light"
+  >
+    <div class="button is-primary">
+            <span
+              class="icon is-large"
+              data-action="click->layout#toggleNavigation"
+            >
+              <span class="fas fa-bars"></span>
+            </span>
+    </div>
+    <%= controls %>
+  </div>
+  <div class="main-display m-0 p-0">
+    <%= applet %>
+  </div>
+<% end %>

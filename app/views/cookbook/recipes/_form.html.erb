@@ -14,6 +14,6 @@
 
   <div class="buttons is-centered pb-3">
     <%= form.submit class: 'button is-primary', data: { action: 'click->layout#requestFromButton' } %>
-    <%= render Layout::CloseModalComponent.new %>
+    <%= render Layout::AuxiliaryPanel::Buttons::CloseComponent.new %>
   </div>
 <% end %>

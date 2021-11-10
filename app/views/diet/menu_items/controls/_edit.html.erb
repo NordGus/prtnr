@@ -1,5 +1,5 @@
 <%=
-  render Layout::Actions::ButtonComponent.new edit_diet_menu_menu_item_url(menu_item, menu_id: date_as_id(menu_item.date), format: :turbo_stream),
-                                              icon: FontAwesome::Icon::FasComponent.new('pen'),
-                                              options: { id: "#{dom_id(menu_item)}_edit_button", color: :info }
+  render Layout::Actions::ModalTriggerComponent.new edit_diet_menu_menu_item_url(menu_item, menu_id: date_as_id(menu_item.date), format: :turbo_stream),
+                                                    icon: FontAwesome::Icon::FasComponent.new('pen'),
+                                                    options: { id: "#{dom_id(menu_item)}_edit_button", color: :info }
 %>
