@@ -3,18 +3,31 @@
 module Form
   module Input
     # Form::Input::SelectComponent
-    class SelectComponent < ViewComponent::Base
-      def initialize(form:, attr:, model:, collection_class:)
+    class SelectComponent < ::ViewComponent::Base
+      def initialize(form, attr:, collection_class:, has_errors: false, options: {})
         @form = form
         @attr = attr
-        @model = model
-        @errors = model.errors&.full_messages_for(attr)
         @collection_class = collection_class
-
-        @input_classes = 'select is-fullwidth '
-        @input_classes += 'is-danger' if @errors.present?
+        @options = ignite_options(options, has_errors)
 
         super
+      end
+
+      private
+
+      def defaults
+        {
+          selected: nil,
+          class: ''
+        }
+      end
+
+      def ignite_options(options, has_errors)
+        merged_options = defaults.deep_merge(options)
+
+        merged_options[:class] = "select is-fullwidth #{merged_options[:class]} #{has_errors ? 'is-danger' : ''}"
+
+        merged_options
       end
     end
   end

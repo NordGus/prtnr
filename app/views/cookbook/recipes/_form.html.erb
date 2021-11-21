@@ -1,15 +1,94 @@
 <%= form_with(model: recipe, scope: :recipe) do |form| %>
-
   <div class="block">
-    <%= render Form::Input::ImageComponent.new(form: form, attr: :cover_image, model: recipe) %>
+    <%=
+      render Form::Field::ImageComponent.new form, attr: :cover_image,
+                                             image: recipe&.cover_image,
+                                             has_errors: errors_for?(recipe, :cover_image) do |field|
+    %>
+      <%= field.errors formatted_errors(recipe, :cover_image) %>
+    <% end %>
 
-    <%= render Form::Input::TextComponent.new(form: form, attr: :name, model: recipe) %>
+    <%= render Form::Field::Component.new do |field| %>
+      <%= field.label form, attr: :name %>
 
-    <%= render Form::Input::LimitedTextareaComponent.new(form: form, attr: :description, model: recipe, limit: 200, fixed: true) %>
+      <%= field.control do %>
+        <div class="control">
+          <%= render Form::Input::TextComponent.new(form, attr: :name, has_errors: errors_for?(recipe, :name)) %>
+        </div>
+      <% end %>
 
-    <%= render Form::Input::NumericComponent.new(form: form, attr: :portions, model: recipe) %>
+      <%= field.errors formatted_errors(recipe, :name) %>
+    <% end %>
 
-    <%= render Form::Input::RichTextareaComponent.new(form: form, attr: :preparation, model: recipe) %>
+    <%= render Form::Field::Component.new options: { data: { controller: 'input-limitable' } } do |field| %>
+      <%= field.label form, attr: :description %>
+
+      <%= field.control do %>
+        <div class="control">
+          <%=
+            render Form::Input::Textarea::Component.new form,
+                                                        attr: :description,
+                                                        has_errors: errors_for?(recipe, :description),
+                                                        options: {
+                                                          fixed: true,
+                                                          data: {
+                                                            limit: description_limit,
+                                                            input_limitable_target: 'input',
+                                                            action: 'change->input-limitable#updateCounter keyup->input-limitable#updateCounter'
+                                                          }
+                                                        }
+          %>
+        </div>
+      <% end %>
+
+      <%= field.help do %>
+        <%= render Form::Input::Textarea::Limited::CounterComponent.new limit: description_limit, length: recipe.description&.length %>
+      <% end %>
+
+      <%= field.errors formatted_errors(recipe, :description) %>
+    <% end %>
+
+    <%= render Form::Field::Component.new options: { data: { controller: 'input-numeric' } } do |field| %>
+      <%= field.label form, attr: :servings %>
+
+      <%= field.control do %>
+        <%= render Form::Field::Component.new options: { grouped: true } do |subfield| %>
+          <%= subfield.control do %>
+            <div class="control">
+              <%= render Form::Input::Numeric::DecrementComponent.new %>
+            </div>
+          <% end %>
+
+          <%= subfield.control do %>
+            <div class="control is-expanded">
+              <%=
+                render Form::Input::Numeric::Component.new form,
+                                                           attr: :servings,
+                                                           has_errors: errors_for?(recipe, :servings)
+              %>
+            </div>
+          <% end %>
+
+          <%= subfield.control do %>
+            <div class="control">
+              <%= render Form::Input::Numeric::IncrementComponent.new %>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <%= field.errors formatted_errors(recipe, :servings) %>
+    <% end %>
+
+    <%= render Form::Field::Component.new do |field| %>
+      <%= field.label form, attr: :preparation %>
+
+      <%= field.control do %>
+        <div class="control rich-text">
+          <%= render Form::Input::Textarea::RichComponent.new form, attr: :preparation %>
+        </div>
+      <% end %>
+    <% end %>
   </div>
 
   <div class="buttons is-centered pb-3">

@@ -1,0 +1,29 @@
+<%= tag.div class: @options[:class], data: @options[:data] do %>
+  <div class="control is-flex is-justify-content-center">
+    <%=
+      image_tag @image.present? ? @image : '',
+                class: "rounded-image mb-2 #{ @image.present? ? '' : 'is-hidden' }",
+                data: @options[:preview][:data]
+    %>
+  </div>
+  <div class="control">
+    <div class="file has-name is-fullwidth">
+      <%=
+        render Form::Input::ImageComponent.new @form,
+                                               attr: @attr,
+                                               has_errors: @has_errors,
+                                               filename: @image&.filename || '',
+                                               options: {
+                                                 input: @options[:input],
+                                                 filename: @options[:filename]
+                                               }
+      %>
+    </div>
+  </div>
+  <% helps.each do |help| %>
+    <%= help %>
+  <% end %>
+  <% errors.each do |error| %>
+    <%= error %>
+  <% end %>
+<% end %>

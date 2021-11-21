@@ -2,6 +2,8 @@
 
 # CookbookController
 class CookbookController < ActionController::Base
+  include FormsHelper
+
   layout false
 
   before_action :set_applet_controller

@@ -1,9 +1,1 @@
-<div class="field">
-  <%= @form.label @attr, class: 'label' %>
-  <div class="control">
-    <%= @form.text_field @attr, class: @input_classes, data: @options[:data] %>
-  </div>
-  <% @errors&.each do |error| %>
-    <p class="help is-danger"><%= error %></p>
-  <% end %>
-</div>
+<%= @form.text_field @attr, class: @class, data: @options[:data] %>

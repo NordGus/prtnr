@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 2021_11_05_102130) do
   create_table "cookbook_recipes", force: :cascade do |t|
     t.string "name", null: false
     t.string "description"
-    t.integer "portions", default: 0, null: false
+    t.integer "servings", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "cookbook_recipes_name_index", unique: true
@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(version: 2021_11_05_102130) do
   create_table "diet_menu_items", force: :cascade do |t|
     t.bigint "recipe_id", null: false
     t.date "date", null: false
-    t.integer "portions", default: 1, null: false
+    t.integer "servings", default: 1, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["date"], name: "diet_menu_items_date_index"

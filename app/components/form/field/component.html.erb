@@ -1,0 +1,12 @@
+<%= tag.div class: @class, data: @options[:data] do %>
+  <%= label %>
+  <% controls.each do |control| %>
+    <%= control %>
+  <% end %>
+  <% helps.each do |help| %>
+    <%= help %>
+  <% end %>
+  <% errors.each do |error| %>
+    <%= error %>
+  <% end %>
+<% end %>

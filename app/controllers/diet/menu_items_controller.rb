@@ -47,7 +47,7 @@ module Diet
     end
 
     def menu_item_params
-      params.require(:menu_item).permit(:date, :portions, :recipe_id)
+      params.require(:menu_item).permit(:date, :servings, :recipe_id)
     end
   end
 end

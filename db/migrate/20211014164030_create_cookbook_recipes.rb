@@ -3,7 +3,7 @@ class CreateCookbookRecipes < ActiveRecord::Migration[6.1]
     create_table :cookbook_recipes do |t|
       t.string :name, null: false
       t.string :description
-      t.integer :portions, default: 0, null: false
+      t.integer :servings, default: 0, null: false
 
       t.timestamps
 

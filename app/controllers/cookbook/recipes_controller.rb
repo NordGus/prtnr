@@ -47,7 +47,7 @@ module Cookbook
     end
 
     def recipe_params
-      params.require(:recipe).permit(:name, :description, :portions, :preparation, :cover_image)
+      params.require(:recipe).permit(:name, :description, :servings, :preparation, :cover_image)
     end
   end
 end

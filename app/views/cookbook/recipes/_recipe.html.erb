@@ -6,7 +6,7 @@
 <div class="header has-background-link-light">
   <div class="<%= recipe_header_content_class.join(' ') %>">
     <h1 class="title <%= recipe.cover_image.attached? ? 'has-text-white' : '' %>"><%= @recipe.name %></h1>
-    <p class="subtitle <%= recipe.cover_image.attached? ? 'has-text-white' : '' %> is-5">For <%= pluralize @recipe.portions, 'person' %></p>
+    <p class="subtitle <%= recipe.cover_image.attached? ? 'has-text-white' : '' %> is-5">For <%= pluralize @recipe.servings, 'person' %></p>
   </div>
   <% if recipe.cover_image.attached? %>
     <%= image_tag recipe.cover_image %>

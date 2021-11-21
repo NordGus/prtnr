@@ -3,7 +3,7 @@
 module Layout
   module Applet
     # Layout::Applet::Component
-    class Component < ViewComponent::Base
+    class Component < ::ViewComponent::Base
       renders_one :applet
       renders_one :controls
 

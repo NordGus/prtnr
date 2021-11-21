@@ -2,7 +2,7 @@
 
 module Previews
   # Previews::RecipeIngredientComponent
-  class RecipeIngredientComponent < ViewComponent::Base
+  class RecipeIngredientComponent < ::ViewComponent::Base
     with_collection_parameter :recipe_ingredient
 
     def initialize(recipe_ingredient:, recipe:, style: :link)

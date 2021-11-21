@@ -2,30 +2,44 @@
 
 module Form
   module Input
-    class ImageComponent < ViewComponent::Base
-      def initialize(form:, attr:, model:, options: {})
-        defaults = { preview_data: {}, field_data: {} }
-
-        options = defaults.deep_merge(options)
-        @preview_data = { input_imageable_target: 'preview' }.deep_merge(options[:preview_data])
-        @field_data = field_data(options[:field_data])
-        @form = form
+    # Form::Input::ImageComponent
+    class ImageComponent < ::ViewComponent::Base
+      def initialize(form_builder, attr:, has_errors: false, filename: '', options: {})
+        @form = form_builder
         @attr = attr
-        @errors = model.errors&.full_messages_for(attr)
-        @image = model.send(attr)
+        @filename = filename
+        @options = ignite_options(options, has_errors)
 
-        @input_classes = ['file-input']
-        @input_classes << 'is-danger' if @errors.present?
         super
       end
 
-      def field_data(filed_data = {})
-        base_action = ' change->input-imageable#readFiles'
-        data = { input_imageable_target: 'input' }.deep_merge(filed_data)
+      private
 
-        data[:action] = data[:action].present? ? data[:action] + base_action : base_action
+      def defaults
+        {
+          filename: {
+            data: {
+              input_imageable_target: 'name',
+              cookbook_ingredient_target: 'fileName'
+            },
+            class: 'file-name'
+          },
+          input: {
+            data: {
+              input_imageable_target: 'input'
+            },
+            class: ''
+          }
+        }
+      end
 
-        data
+      def ignite_options(options, has_errors)
+        merged_options = defaults.deep_merge(options)
+
+        merged_options[:input][:data][:action] = "#{merged_options[:input][:data][:action]} change->input-imageable#readFiles"
+        merged_options[:input][:class] = "#{merged_options[:input][:class]} file-input #{has_errors ? 'is-danger' : ''}"
+
+        merged_options
       end
     end
   end

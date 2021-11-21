@@ -7,7 +7,7 @@ module Diet
       belongs_to :recipe, class_name: 'Cookbook::Recipe', inverse_of: :menu_items, foreign_key: :recipe_id
 
       validates :date, presence: true
-      validates :portions, presence: true, numericality: { greater_than: 0 }
+      validates :servings, presence: true, numericality: { greater_than: 0 }
     end
   end
 end

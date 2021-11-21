@@ -3,7 +3,7 @@
 module Layout
   module AuxiliaryPanel
     # Layout::AuxiliaryPanel::Component
-    class Component < ViewComponent::Base
+    class Component < ::ViewComponent::Base
       def initialize(expanded: false)
         @expanded = expanded
 

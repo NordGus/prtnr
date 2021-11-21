@@ -56,7 +56,7 @@
       </div>
     <% end %>
 
-    <%= render Form::Input::NumericComponent.new(form: form, attr: :portions, model: menu_item) %>
+    <%= render Form::Input::NumericComponent.new(form: form, attr: :servings, model: menu_item) %>
 
     <div class="field">
       <%= form.label :date, class: 'label' %>

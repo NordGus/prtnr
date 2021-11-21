@@ -1,33 +1,18 @@
-<div class="field" data-controller="input-imageable">
-  <div class="control is-flex is-justify-content-center">
-    <%=
-      image_tag @image.present? ? @image : '',
-                class: "rounded-image mb-2 #{ @image.present? ? '' : 'is-hidden' }",
-                data: @preview_data
-    %>
-  </div>
-  <div class="control">
-      <div class="file has-name is-fullwidth">
-        <label class="file-label">
-          <%= @form.file_field @attr,
-                               class: @input_classes,
-                               data: @field_data
-          %>
-          <span class="file-cta">
-            <span class="file-icon">
-              <i class="fas fa-paperclip"></i>
-            </span>
-            <span class="file-label">
-              <%= @attr.to_s.titleize %>
-            </span>
-          </span>
-          <span class="file-name" data-input-imageable-target="name" data-cookbook-ingredient-target="fileName">
-            <%= @image&.filename&.to_s || '' %>
-          </span>
-        </label>
-      </div>
-    </div>
-  <% @errors&.each do |error| %>
-    <p class="help is-danger"><%= error %></p>
-  <% end %>
-</div>
+<label class="file-label">
+  <%= @form.file_field @attr,
+                       class: @options[:input][:class],
+                       data: @options[:input][:data]
+  %>
+
+  <span class="file-cta">
+    <span class="file-icon">
+      <%= render FontAwesome::Icon::FasComponent.new 'paperclip' %>
+    </span>
+
+    <span class="file-label">
+      <%= @attr.to_s.titleize %>
+    </span>
+  </span>
+
+  <%= tag.span @filename, class: @options[:filename][:class], data: @options[:filename][:data] %>
+</label>

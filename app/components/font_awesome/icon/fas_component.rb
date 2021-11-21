@@ -3,7 +3,7 @@
 module FontAwesome
   module Icon
     # FontAwesome::Icon::FasComponent
-    class FasComponent < ViewComponent::Base
+    class FasComponent < ::ViewComponent::Base
       include Icon
 
       def initialize(icon_name, size: :default)

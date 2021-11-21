@@ -1,13 +1,5 @@
-<div class="field">
-  <%= @form.label @attr, class: 'label' %>
-  <div class="control">
-    <div class="<%= @input_classes %>">
-      <%=
-        @form.select @attr, @collection_class.options_for_select, { prompt: @collection_class.select_prompt, selected: @model.send(@attr)&.option_for_select_value }
-      %>
-    </div>
-  </div>
-  <% @errors&.each do |error| %>
-    <p class="help is-danger"><%= error %></p>
-  <% end %>
-</div>
+<%= tag.div class: @options[:class] do %>
+  <%=
+    @form.select @attr, @collection_class.options_for_select, { prompt: @collection_class.select_prompt, selected: @options[:selected] }
+  %>
+<% end %>

@@ -2,19 +2,23 @@
 
 module Form
   module Input
-    class TextComponent < ViewComponent::Base
-      def initialize(form:, attr:, model:, options: {})
-        defaults = { data: {} }
-
+    # Form::Input::TextComponent
+    class TextComponent < ::ViewComponent::Base
+      def initialize(form_builder, attr:, has_errors: false, options: {})
         @options = defaults.deep_merge(options)
-        @form = form
+        @form = form_builder
         @attr = attr
-        @errors = model&.errors&.full_messages_for(attr)
 
-        @input_classes = ['input']
-        @input_classes << 'is-danger' if @errors.present?
+        @class = ['input']
+        @class << 'is-danger' if has_errors
 
         super
+      end
+
+      private
+
+      def defaults
+        { data: {} }
       end
     end
   end

@@ -3,7 +3,7 @@
 module Layout
   module Actions
     # Layout::Actions::ButtonComponent
-    class ModalTriggerComponent < ViewComponent::Base
+    class ModalTriggerComponent < ::ViewComponent::Base
       include Bulma::ButtonHelper
 
       def initialize(action_url, icon: nil, options: {})

@@ -6,7 +6,7 @@ class CreateDietMenuItems < ActiveRecord::Migration[6.1]
                    foreign_key: { to_table: :cookbook_recipes },
                    index: { name: :diet_menu_items_cookbook_recipe_reference }
       t.date       :date, null: false
-      t.integer    :portions, null: false, default: 1
+      t.integer    :servings, null: false, default: 1
 
       t.timestamps
 

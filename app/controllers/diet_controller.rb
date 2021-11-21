@@ -2,6 +2,8 @@
 
 # DietController
 class DietController < ActionController::Base
+  include FormsHelper
+
   layout false
 
   before_action :set_applet_controller
