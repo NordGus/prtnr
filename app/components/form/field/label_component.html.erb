@@ -1,1 +1,5 @@
-<%= @form.label @attr, class: 'label' %>
+<% if @text.present? %>
+  <%= @form.label @attr, @text, class: 'label' %>
+<% else %>
+  <%= @form.label @attr, class: 'label' %>
+<% end %>

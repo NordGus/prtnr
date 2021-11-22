@@ -24,51 +24,90 @@
     <%= form.fields_for :recipe, menu_item.recipe do |recipe_form| %>
       <% cover_image = menu_item.recipe&.cover_image %>
 
-      <div class="field">
-        <div class="control is-flex is-justify-content-center">
-          <%=
-            image_tag cover_image.present? ? cover_image : '',
-                      class: "rounded-image mb-2 #{ cover_image.present? ? '' : 'is-hidden' }",
-                      data: { diet_menu_item_target: 'preview' }
-          %>
-        </div>
-      </div>
+      <%= render Form::Field::Component.new do |field| %>
+        <%= field.control do %>
+          <div class="control is-flex is-justify-content-center">
+            <%=
+              image_tag cover_image.present? ? cover_image : '',
+                        class: "rounded-image mb-2 #{ cover_image.present? ? '' : 'is-hidden' }",
+                        data: { diet_menu_item_target: 'preview' }
+            %>
+          </div>
+        <% end %>
+      <% end %>
 
       <div class="buttons is-centered m-0 p-0" id="recipe_search_results"></div>
 
-      <div class="field">
-        <%= recipe_form.label :name, 'Recipe', class: 'label' %>
-        <div class="control">
-          <%=
-            recipe_form.text_field :name,
-                                   class: 'input',
-                                   data: {
-                                     action: 'change->searchable#search keyup->searchable#search',
-                                     diet_menu_item_target: 'name'
-                                   }
-          %>
-        </div>
-        <% if menu_item.errors&.full_messages_for(:recipe)&.any? %>
-          <% menu_item.errors.full_messages_for(:recipe).each do |error| %>
-            <p class="help is-danger"><%= error %></p>
-          <% end %>
+      <%= render Form::Field::Component.new do |field| %>
+        <%= field.label form, attr: :name, text: 'Recipe' %>
+
+        <%= field.control do %>
+          <div class="control">
+            <%=
+              render Form::Input::TextComponent.new recipe_form,
+                                                    attr: :name,
+                                                    has_errors: errors_for?(menu_item, :recipe),
+                                                    options: {
+                                                      data: {
+                                                        action: 'change->searchable#search keyup->searchable#search',
+                                                        diet_menu_item_target: 'name'
+                                                      }
+                                                    }
+            %>
+          </div>
         <% end %>
-      </div>
+
+        <%= field.errors formatted_errors(menu_item, :recipe) %>
+      <% end %>
     <% end %>
 
-    <%= render Form::Input::NumericComponent.new(form: form, attr: :servings, model: menu_item) %>
+    <%= render Form::Field::Component.new options: { data: { controller: 'input-numeric' } } do |field| %>
+      <%= field.label form, attr: :servings %>
 
-    <div class="field">
-      <%= form.label :date, class: 'label' %>
-      <div class="control">
-        <%= form.date_field :date, class: 'input' %>
-      </div>
-      <% if menu_item.errors&.full_messages_for(:date)&.any? %>
-        <% menu_item.errors.full_messages_for(:date).each do |error| %>
-          <p class="help is-danger"><%= error %></p>
+      <%= field.control do %>
+        <%= render Form::Field::Component.new options: { grouped: true } do |subfield| %>
+          <%= subfield.control do %>
+            <div class="control">
+              <%= render Form::Input::Numeric::DecrementComponent.new %>
+            </div>
+          <% end %>
+
+          <%= subfield.control do %>
+            <div class="control is-expanded">
+              <%=
+                render Form::Input::Numeric::Component.new form,
+                                                           attr: :servings,
+                                                           has_errors: errors_for?(menu_item, :servings)
+              %>
+            </div>
+          <% end %>
+
+          <%= subfield.control do %>
+            <div class="control">
+              <%= render Form::Input::Numeric::IncrementComponent.new %>
+            </div>
+          <% end %>
         <% end %>
       <% end %>
-    </div>
+
+      <%= field.errors formatted_errors(menu_item, :servings) %>
+    <% end %>
+
+    <%= render Form::Field::Component.new do |field| %>
+      <%= field.label form, attr: :date %>
+
+      <%= field.control do %>
+        <div class="control">
+          <%=
+            render Form::Input::Date::Component.new form,
+                                                    attr: :date,
+                                                    has_errors: errors_for?(menu_item, :date)
+          %>
+        </div>
+      <% end %>
+
+      <%= field.errors formatted_errors(menu_item, :date) %>
+    <% end %>
   </div>
 
   <div class="buttons is-centered pb-3">
