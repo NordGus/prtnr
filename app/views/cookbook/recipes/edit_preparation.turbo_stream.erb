@@ -1,0 +1,12 @@
+<%= turbo_stream.replace :edit_recipe_preparation_button do %>
+  <%= render 'cookbook/recipes/controls/preparation', recipe: @recipe %>
+<% end %>
+
+<%= turbo_stream.update :auxiliary_panel do %>
+  <div class="block">
+    <h1 class="title">Edit Preparation</h1>
+    <p class="subtitle is-6">for <strong><%= @recipe.name %></strong></p>
+  </div>
+
+  <%= render 'preparation_form', recipe: @recipe %>
+<% end %>

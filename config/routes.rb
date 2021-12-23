@@ -22,7 +22,11 @@ Rails.application.routes.draw do
     end
 
     resources :recipes do
-      get :delete, on: :member
+      member do
+        get :delete
+        get :edit_preparation
+        put :update_preparation
+      end
 
       resources :recipe_ingredients, only: %i[index new create edit update destroy] do
         get :delete, on: :member

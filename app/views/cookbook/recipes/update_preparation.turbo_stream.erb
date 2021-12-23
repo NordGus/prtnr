@@ -1,0 +1,9 @@
+<%= turbo_stream.update :auxiliary_panel do %>
+  <%= render Notices::SuccessComponent.new do %>
+    Preparation for <strong><%= @recipe.name %></strong> updated!
+  <% end %>
+<% end %>
+
+<%= turbo_stream.update :recipe_preparation_tab do %>
+  <%= render 'cookbook/recipes/preparation', recipe: @recipe %>
+<% end %>

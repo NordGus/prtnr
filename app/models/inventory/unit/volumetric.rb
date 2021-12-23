@@ -2,8 +2,8 @@
 
 module Inventory
   module Unit
-    # Inventory::Unit::Base
-    class Unitable < Base
+    # Inventory::Unit::Volumetric
+    class Volumetric < Base
     end
   end
 end

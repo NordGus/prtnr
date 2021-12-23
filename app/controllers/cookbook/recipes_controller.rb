@@ -3,7 +3,7 @@
 module Cookbook
   # RecipesController main recipes controller
   class RecipesController < CookbookController
-    before_action :set_recipe, only: %i[show edit update delete destroy]
+    before_action :set_recipe, only: %i[show edit update delete destroy edit_preparation update_preparation]
 
     def index
       respond_to do |format|
@@ -40,6 +40,16 @@ module Cookbook
       redirect_to cookbook_recipes_url, method: :get
     end
 
+    # Preparation actions
+
+    def edit_preparation; end
+
+    def update_preparation
+      render :edit_prepatation unless @recipe.update(preparation_params)
+    end
+
+    # Preparation actions
+
     private
 
     def set_recipe
@@ -47,7 +57,11 @@ module Cookbook
     end
 
     def recipe_params
-      params.require(:recipe).permit(:name, :description, :servings, :preparation, :cover_image)
+      params.require(:recipe).permit(:name, :description, :servings, :cover_image)
+    end
+
+    def preparation_params
+      params.require(:recipe).permit(:preparation)
     end
   end
 end

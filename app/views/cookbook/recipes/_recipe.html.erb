@@ -39,13 +39,9 @@
     </ul>
   </div>
 
-  <div class="" data-tabs-target="tab" data-tab-name="preparation">
-    <% if recipe.preparation.present? %>
-      <%= recipe.preparation %>
-    <% else %>
-      <i>Insert a comprehensive and detailed list preparation instructions...</i>
-    <% end %>
-  </div>
+  <%= turbo_frame_tag :recipe_preparation_tab, class: 'is-block', data: { tab_name: :preparation, tabs_target: :tab } do %>
+    <%= render 'cookbook/recipes/preparation', recipe: @recipe %>
+  <% end %>
 
   <div class="is-hidden" data-tabs-target="tab" data-tab-name="ingredients">
     <%= turbo_frame_tag :ingredients, src: cookbook_recipe_recipe_ingredients_url(recipe, format: :turbo_stream), class: 'is-block' do %>

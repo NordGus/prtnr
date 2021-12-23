@@ -1,0 +1,9 @@
+<div class="block">
+  <%= render 'cookbook/recipes/controls/preparation', recipe: recipe %>
+</div>
+
+<% if recipe.preparation.present? %>
+  <%= recipe.preparation %>
+<% else %>
+  <i>Insert a comprehensive and detailed list preparation instructions...</i>
+<% end %>

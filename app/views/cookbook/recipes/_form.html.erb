@@ -79,16 +79,6 @@
 
       <%= field.errors formatted_errors(recipe, :servings) %>
     <% end %>
-
-    <%= render Form::Field::Component.new do |field| %>
-      <%= field.label form, attr: :preparation %>
-
-      <%= field.control do %>
-        <div class="control rich-text">
-          <%= render Form::Input::Textarea::RichComponent.new form, attr: :preparation %>
-        </div>
-      <% end %>
-    <% end %>
   </div>
 
   <div class="buttons is-centered pb-3">
