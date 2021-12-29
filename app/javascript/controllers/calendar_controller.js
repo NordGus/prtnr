@@ -41,6 +41,9 @@ export default class CalendarController extends Controller {
 
         this.monthTarget.options.selectedIndex = (selectedIndex + 1) % this.monthTarget.options.length
 
+        if (this.monthTarget.options.selectedIndex === 0)
+            this.yearTarget.value = (Number(this.yearTarget.value) + 1).toFixed(0)
+
         const _ = await get(this._calendarUrl(), { responseKind: 'turbo-stream' })
     }
 
@@ -48,6 +51,9 @@ export default class CalendarController extends Controller {
         const { selectedIndex } = this.monthTarget.options
 
         this.monthTarget.options.selectedIndex = selectedIndex === 0 ? this.monthTarget.options.length - 1 : selectedIndex - 1
+
+        if (this.monthTarget.options.selectedIndex === 11)
+            this.yearTarget.value = (Number(this.yearTarget.value) - 1).toFixed(0)
 
         const _ = await get(this._calendarUrl(), { responseKind: 'turbo-stream' })
     }
