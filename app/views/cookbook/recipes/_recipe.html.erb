@@ -40,7 +40,7 @@
   </div>
 
   <%= turbo_frame_tag :recipe_preparation_tab, class: 'is-block', data: { tab_name: :preparation, tabs_target: :tab } do %>
-    <%= render 'cookbook/recipes/preparation', recipe: @recipe %>
+    <%= render 'cookbook/preparations/preparation', recipe: @recipe %>
   <% end %>
 
   <div class="is-hidden" data-tabs-target="tab" data-tab-name="ingredients">

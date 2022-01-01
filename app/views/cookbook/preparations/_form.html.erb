@@ -1,6 +1,6 @@
 <%= form_for recipe,
              as: :recipe,
-             url: update_preparation_cookbook_recipe_url(recipe),
+             url: cookbook_recipe_preparations_url(recipe),
              method: :put do |form| %>
   <div class="block">
     <%= render Form::Field::Component.new do |field| %>

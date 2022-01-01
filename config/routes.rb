@@ -24,8 +24,14 @@ Rails.application.routes.draw do
     resources :recipes do
       member do
         get :delete
-        get :edit_preparation
-        put :update_preparation
+      end
+
+      resources :preparations, only: [] do
+        collection do
+          get :edit
+          put :update
+          patch :update
+        end
       end
 
       resources :recipe_ingredients, only: %i[index new create edit update destroy] do
